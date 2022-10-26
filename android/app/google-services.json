@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "426511614366",
+    "project_id": "posit-afbe6",
+    "storage_bucket": "posit-afbe6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426511614366:android:a07b5a400daca4e2b3d68f",
+        "android_client_info": {
+          "package_name": "com.example.posit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426511614366-m8e6r1b7fsj7inh9hu9kun05ddabm4o6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.posit",
+            "certificate_hash": "1a6945a1beffe3791413c33170eb4de7148f8534"
+          }
+        },
+        {
+          "client_id": "426511614366-t0gvq1qojk3o0ff8vvifiu15ajckcv26.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_6bsRVOUPe00sbAQrmVY_mKI_51co9EA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426511614366-t0gvq1qojk3o0ff8vvifiu15ajckcv26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
