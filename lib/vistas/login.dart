@@ -9,7 +9,7 @@ class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar("PosIT"),
+      appBar: cabecera("PosIT"),
       body: Center(
           child: Container(
         decoration: BoxDecoration(
@@ -42,9 +42,25 @@ class login extends StatelessWidget {
             SizedBox(
               child: button(() {}, "Iniciar sesion"),
             ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Spacer(),
+                Text(
+                  '¿No tienes cuenta?',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                Spacer()
+              ],
+            ),
             Spacer(),
           ],
-          //Falta agregar opcion por si el user no tiene cuenta
         ),
       )),
     );

@@ -19,7 +19,9 @@ AppBar appBar(String titulo) {
         const Spacer(
           flex: 4,
         ),
-        imagenCircular('https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',30),
+        imagenCircular(
+            'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
+            30),
         const Spacer(
           flex: 1,
         ),
@@ -30,10 +32,9 @@ AppBar appBar(String titulo) {
   );
 }
 
-
-CircleAvatar imagenCircular(String imagen,double width) {
+CircleAvatar imagenCircular(String imagen, double width) {
   return CircleAvatar(
-    radius: width/2,
+    radius: width / 2,
     backgroundImage: NetworkImage(imagen),
   );
 }
@@ -42,7 +43,7 @@ Container post(String fotoPerfil, String usuario, String fotoPost) {
   return Container(
     width: 350,
     height: 400,
-    margin: const EdgeInsets.only(bottom: 5,top: 5),
+    margin: const EdgeInsets.only(bottom: 5, top: 5),
     decoration: BoxDecoration(
       border: Border.all(
         color: Colors.transparent,
@@ -52,13 +53,15 @@ Container post(String fotoPerfil, String usuario, String fotoPost) {
     ),
     child: Column(
       children: [
-        SizedBox(height: 5,),
+        SizedBox(
+          height: 5,
+        ),
         Row(
           children: [
             const SizedBox(
               width: 10,
             ),
-            imagenCircular(fotoPerfil,50),
+            imagenCircular(fotoPerfil, 50),
             const SizedBox(
               width: 10,
             ),
@@ -69,14 +72,17 @@ Container post(String fotoPerfil, String usuario, String fotoPost) {
           ],
         ),
         Image.network(
-          
           fotoPost,
           width: 330,
           height: 330,
         ),
         Row(
           children: [
-            Image.network('https://www.pngmart.com/files/15/Valentines-Day-Heart-Red-PNG.png',width: 10,height: 10,)
+            Image.network(
+              'https://www.pngmart.com/files/15/Valentines-Day-Heart-Red-PNG.png',
+              width: 10,
+              height: 10,
+            )
           ],
         ),
       ],
@@ -98,6 +104,7 @@ TextField campo(String hint) {
       ),
     ),
     style: TextStyle(color: Colors.white),
+    autofocus: true,
   );
 }
 
@@ -111,7 +118,41 @@ GestureDetector button(VoidCallback function, String text) {
         color: Color(0xFF37A557),
         borderRadius: BorderRadius.circular(30),
       ),
-      child: Center(child: Text(text, style: TextStyle(color: Colors.white))),
+      child: Center(
+          child: Text(text,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20))),
     ),
+  );
+}
+
+AppBar cabecera(String titulo) {
+  return AppBar(
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Spacer(
+          flex: 1,
+        ),
+        Image.network(
+          'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
+          height: 30,
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Container(padding: const EdgeInsets.all(8.0), child: Text(titulo)),
+        const Spacer(
+          flex: 4,
+        ),
+        const Spacer(
+          flex: 1,
+        ),
+      ],
+    ),
+    backgroundColor: Color(0xFF031630),
+    toolbarHeight: 45,
   );
 }
