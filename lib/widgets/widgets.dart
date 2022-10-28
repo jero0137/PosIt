@@ -37,7 +37,18 @@ AppBar appBar(String titulo) {
   );
 }
 
-Container post() {
+ClipRRect imagenCircular(String url,double longitud,double altura) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(30.0),
+    child: Image(
+      image: NetworkImage(url),
+      width: longitud,
+      height: altura,
+    ),
+  );
+}
+
+Container post(String fotoPerfil, String usuario, String fotoPost) {
   return Container(
     width: 350,
     height: 350,
@@ -47,6 +58,28 @@ Container post() {
       ),
       borderRadius: BorderRadius.all(Radius.circular(20)),
       color: Color.fromRGBO(133, 130, 229, 90),
+    ),
+    child: Column(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            imagenCircular(fotoPerfil,50,50),
+            Text(
+              usuario,
+              style: TextStyle(color: Colors.white),
+            )
+          ],
+        ),
+        Image.network(
+          fotoPost,
+          width: 330,
+          height: 280,
+        ),
+        Row(),
+      ],
     ),
   );
 }
