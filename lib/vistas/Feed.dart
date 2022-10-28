@@ -14,9 +14,11 @@ class Feed extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: [            
               post('https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
-              'Jen','https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000'),
+              'Jen0101010','https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000'),
+              post('https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
+              'Jen0101010','https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000'),
             ],
           ),
         ),

@@ -5,29 +5,22 @@ AppBar appBar(String titulo) {
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Spacer(
+        const Spacer(
           flex: 1,
         ),
         Image.network(
           'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
           height: 30,
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Container(padding: const EdgeInsets.all(8.0), child: Text(titulo)),
-        Spacer(
+        const Spacer(
           flex: 4,
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(30.0),
-          child: const Image(
-            image: NetworkImage(
-                'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740'),
-            width: 30,
-          ),
-        ),
-        Spacer(
+        imagenCircular('https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',30),
+        const Spacer(
           flex: 1,
         ),
       ],
@@ -37,21 +30,19 @@ AppBar appBar(String titulo) {
   );
 }
 
-ClipRRect imagenCircular(String url,double longitud,double altura) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(30.0),
-    child: Image(
-      image: NetworkImage(url),
-      width: longitud,
-      height: altura,
-    ),
+
+CircleAvatar imagenCircular(String imagen,double width) {
+  return CircleAvatar(
+    radius: width/2,
+    backgroundImage: NetworkImage(imagen),
   );
 }
 
 Container post(String fotoPerfil, String usuario, String fotoPost) {
   return Container(
     width: 350,
-    height: 350,
+    height: 400,
+    margin: const EdgeInsets.only(bottom: 5,top: 5),
     decoration: BoxDecoration(
       border: Border.all(
         color: Colors.transparent,
@@ -61,24 +52,33 @@ Container post(String fotoPerfil, String usuario, String fotoPost) {
     ),
     child: Column(
       children: [
+        SizedBox(height: 5,),
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            imagenCircular(fotoPerfil,50,50),
+            imagenCircular(fotoPerfil,50),
+            const SizedBox(
+              width: 10,
+            ),
             Text(
               usuario,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 20),
             )
           ],
         ),
         Image.network(
+          
           fotoPost,
           width: 330,
-          height: 280,
+          height: 330,
         ),
-        Row(),
+        Row(
+          children: [
+            Image.network('https://www.pngmart.com/files/15/Valentines-Day-Heart-Red-PNG.png',width: 10,height: 10,)
+          ],
+        ),
       ],
     ),
   );
