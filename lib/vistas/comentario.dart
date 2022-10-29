@@ -10,7 +10,7 @@ class comentario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      appBar: cabeceraFlecha('COMENTARIOS'),
+      appBar: cabeceraFlecha('COMENTARIOS', context),
       body: Center(
         child: SingleChildScrollView(
           child:Column(
