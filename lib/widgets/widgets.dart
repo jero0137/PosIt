@@ -39,6 +39,67 @@ CircleAvatar imagenCircular(String imagen, double width) {
   );
 }
 
+Container postAgregar(String foto){
+  return Container(
+    width: 320,
+    height: 240,
+    margin: const EdgeInsets.only(bottom: 5,top: 5),
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Colors.white,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      color: Colors.transparent,
+      
+    ),
+
+    child: Column(
+      children: [
+        Container(
+          width: 300,
+          height: 220,
+          margin: const EdgeInsets.only(bottom: 5,top: 5),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.transparent,
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Color.fromRGBO(133, 130, 229, 90),
+            
+          ),
+          //Falta buscar como insertar la foto ahí
+        ),
+        
+        Row(
+          children: [
+            Container(
+              width: 280,
+              height: 200,
+              margin: const EdgeInsets.only(bottom: 5,top: 5),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.white,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.transparent
+                
+              ),
+              
+            ),
+            
+          ]
+          
+        )
+        
+      ],
+      
+    )
+
+
+  );
+}
+
+
 Container post(String fotoPerfil, String usuario, String fotoPost) {
   return Container(
     width: 350,
@@ -108,6 +169,8 @@ TextField campo(String hint) {
   );
 }
 
+
+
 GestureDetector button(VoidCallback function, String text) {
   return GestureDetector(
     onTap: function,
@@ -125,6 +188,20 @@ GestureDetector button(VoidCallback function, String text) {
                   fontWeight: FontWeight.bold,
                   fontSize: 20))),
     ),
+  );
+}
+
+AppBar cabeceraFlecha(String titulo){ //falta colocar la flecha jiji
+  return AppBar(
+    title: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(padding: const EdgeInsets.all(8.0), child: Text(titulo)),
+        
+      ],
+    ),
+    backgroundColor: Color(0xFF031630),
+    toolbarHeight: 45,
   );
 }
 
@@ -154,5 +231,52 @@ AppBar cabecera(String titulo) {
     ),
     backgroundColor: Color(0xFF031630),
     toolbarHeight: 45,
+  );
+}
+
+Container comentarios(String foto, String usuario, String texto){
+  return Container(
+    width: 300,
+    height: 66,
+    margin: const EdgeInsets.only(bottom: 5, top: 5),
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Colors.transparent,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(50)),
+      color: Color.fromRGBO(133, 130, 229, 90),
+      
+    ),
+    child: Row(
+      children: [
+        Row(
+          children: [
+            const SizedBox(
+              width: 10,
+            ),
+            imagenCircular(foto, 50),
+            const SizedBox(
+              width: 10,
+            ),
+            
+            
+          ],
+        ), 
+        
+        Column(
+          children: [
+            Text(
+              usuario,
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            
+            Text(
+              texto,
+              style: TextStyle(color:  Colors.white, fontSize: 17),
+            )
+          ],
+        )
+      ],
+    )
   );
 }
