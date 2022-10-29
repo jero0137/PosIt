@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:posit/vistas/Feed.dart';
 import 'package:posit/vistas/agregarpost.dart';
 import 'package:posit/vistas/comentario.dart';
+import 'package:posit/vistas/configuracion.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/vistas/signin.dart';
 
@@ -16,11 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: agregarpost(),
+      home: configuracion(),
     );
   }
 }

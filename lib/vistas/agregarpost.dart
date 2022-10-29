@@ -9,7 +9,7 @@ class agregarpost extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      appBar: cabeceraFlecha('NUEVA PUBLICACIÓN'),
+      appBar: cabeceraFlecha2('NUEVA PUBLICACIÓN',context),
       body: Center(
         child: Column(
           children: [
