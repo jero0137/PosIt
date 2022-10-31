@@ -55,7 +55,6 @@ Container postAgregar(String foto) {
         children: [
           Spacer(flex: 1),
           Container(
-            
             width: 300,
             height: 220,
             margin: const EdgeInsets.only(bottom: 5, top: 5),
@@ -66,38 +65,33 @@ Container postAgregar(String foto) {
               borderRadius: BorderRadius.all(Radius.circular(20)),
               color: Color.fromRGBO(133, 130, 229, 90),
             ),
-            
             child: Column(children: [
-               //Falta buscar como insertar la foto ahí
+              //Falta buscar como insertar la foto ahí
             ]),
           ),
           Spacer(flex: 1)
-
-          
         ],
       ));
 }
 
-Container descripcion(String texto){
+Container descripcion(String texto) {
   return Container(
     width: 280,
     height: 200,
     margin: const EdgeInsets.only(bottom: 5, top: 5),
     decoration: BoxDecoration(
-      border: Border.all(
-        color: Colors.white,
-      ),
-    borderRadius: BorderRadius.all(Radius.circular(20)),
-    color: Colors.transparent),
-    child: Column(
-      children: [
-        camposinlinea(' ' + texto),
-      ]
-    ),
+        border: Border.all(
+          color: Colors.white,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.transparent),
+    child: Column(children: [
+      camposinlinea(' ' + texto),
+    ]),
   );
 }
 
-TextField camposinlinea(String descripcion){
+TextField camposinlinea(String descripcion) {
   return TextField(
     decoration: InputDecoration(
       fillColor: Colors.white,
@@ -110,6 +104,7 @@ TextField camposinlinea(String descripcion){
     autofocus: true,
   );
 }
+
 Container post(
     String fotoPerfil, String usuario, String fotoPost, int cantidadLikes) {
   return Container(
@@ -207,7 +202,6 @@ TextField campo(String hint) {
   return TextField(
     decoration: InputDecoration(
       fillColor: Colors.white,
-      
       hintText: hint,
       hintStyle: TextStyle(color: Colors.white),
       focusedBorder: UnderlineInputBorder(
@@ -223,6 +217,26 @@ TextField campo(String hint) {
   );
 }
 
+TextField campoPass(String hint) {
+  return TextField(
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      hintText: hint,
+      hintStyle: TextStyle(color: Colors.white),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+    ),
+    textAlign: TextAlign.center,
+    style: TextStyle(color: Colors.white),
+    autofocus: true,
+    obscureText: true,
+  );
+}
+
 GestureDetector button(VoidCallback function, String text) {
   return GestureDetector(
     onTap: function,
@@ -235,7 +249,7 @@ GestureDetector button(VoidCallback function, String text) {
       ),
       child: Center(
           child: Text(text,
-            textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -243,8 +257,6 @@ GestureDetector button(VoidCallback function, String text) {
     ),
   );
 }
-
-
 
 AppBar cabeceraFlecha(String titulo, BuildContext context) {
   return AppBar(

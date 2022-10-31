@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
 
 class signin extends StatelessWidget {
@@ -17,37 +18,27 @@ class signin extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Spacer(),
-            Row(
-              children: [
-                Spacer(),
-                Image.network(
-                  'https://assets.stickpng.com/images/585e4beacb11b227491c3399.png',
-                  fit: BoxFit.contain,
-                  height: 142,
-                  width: 152,
-                ),
-                Spacer()
-              ],
-            ),
-            Spacer(
-              flex: 1,
-            ),
-            SizedBox(width: 257, child: campo("Ingrese un usuario")),
-            Spacer(),
-            SizedBox(width: 257, child: campo("Ingrese un contraseña")),
             Spacer(
               flex: 2,
             ),
+            SizedBox(width: 257, child: campo("Ingrese nombre completo")),
+            Spacer(flex: 2),
             SizedBox(width: 257, child: campo("Ingrese un correo")),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campo("Ingrese su nombre completo")),
+            SizedBox(width: 257, child: campo("Ingrese un usuario")),
             Spacer(
               flex: 2,
             ),
-
+            SizedBox(width: 257, child: campoPass("Ingrese una contraseña")),
+            Spacer(
+              flex: 2,
+            ),
+            SizedBox(width: 257, child: campoPass("Confirme contraseña")),
+            Spacer(
+              flex: 2,
+            ),
             SizedBox(
               child: button(() {}, "Registrarse"),
             ),
@@ -65,6 +56,32 @@ class signin extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+                SizedBox(
+                    child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return login();
+                      }),
+                    );
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF031630),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Center(
+                        child: Text("Iniciar sesion",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: Color(0xFF8582E5),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14))),
+                  ),
+                )),
                 Spacer()
               ],
             ),
