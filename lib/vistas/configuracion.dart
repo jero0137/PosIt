@@ -58,7 +58,7 @@ class _configuracionState extends State<configuracion> {
                   child: campo('Nueva Contraseña'),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 25,
                 ),
                 Row(
                   children: [
