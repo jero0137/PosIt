@@ -1,11 +1,11 @@
-import 'dart:html';
+//import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/widgets.dart';
 
-class agregarpost extends StatelessWidget{
+class agregarpost extends StatelessWidget {
   const agregarpost({super.key});
-  
+
 /*
   imgFromCamera() async {
     
@@ -31,19 +31,17 @@ _imgFromGallery() async {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      appBar: cabeceraFlecha('NUEVA PUBLICACIÓN',context),
+      appBar: cabeceraFlecha('NUEVA PUBLICACIÓN', context),
       body: Center(
-        child: Column(
-          children: [
-            postAgregar(''),
-            descripcion('Añade una descripción'),
-            Spacer(),
-            SizedBox(
-                child: button(() {}, "Agregar post"),
-            ),
-            Spacer(),
-          ]
-        ),
+        child: Column(children: [
+          postAgregar(''),
+          descripcion('Añade una descripción'),
+          Spacer(),
+          SizedBox(
+            child: button(() {}, "Agregar post"),
+          ),
+          Spacer(),
+        ]),
       ),
     );
   }
