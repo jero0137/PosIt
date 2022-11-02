@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/perfil.dart';
 
 AppBar appBar(String titulo, String link_perfil, BuildContext context) {
   return AppBar(
@@ -23,7 +24,7 @@ AppBar appBar(String titulo, String link_perfil, BuildContext context) {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const perfil()),
+              MaterialPageRoute(builder: (context) => perfil()),
             );
           },
           child: imagenCircular(link_perfil, 30),
@@ -198,6 +199,26 @@ TextField campo(String hint) {
     textAlign: TextAlign.center,
     style: TextStyle(color: Colors.white),
     autofocus: true,
+  );
+}
+
+TextField campoPass(String hint) {
+  return TextField(
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      hintText: hint,
+      hintStyle: TextStyle(color: Colors.white),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+    ),
+    textAlign: TextAlign.center,
+    style: TextStyle(color: Colors.white),
+    autofocus: true,
+    obscureText: true,
   );
 }
 
