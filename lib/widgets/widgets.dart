@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-AppBar appBar(String titulo) {
+AppBar appBar(String titulo, String fotoPerfil, BuildContext context) {
   return AppBar(
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -19,9 +19,17 @@ AppBar appBar(String titulo) {
         const Spacer(
           flex: 4,
         ),
-        imagenCircular(
-            'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
-            30),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const perfil()),
+            );
+          },
+          child: imagenCircular(
+              fotoPerfil,
+              30),
+        ),
         const Spacer(
           flex: 1,
         ),
@@ -180,7 +188,6 @@ TextField campo(String hint) {
   return TextField(
     decoration: InputDecoration(
       fillColor: Colors.white,
-      
       hintText: hint,
       hintStyle: TextStyle(color: Colors.white),
       focusedBorder: UnderlineInputBorder(
@@ -208,7 +215,7 @@ GestureDetector button(VoidCallback function, String text) {
       ),
       child: Center(
           child: Text(text,
-            textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
