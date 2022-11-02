@@ -61,6 +61,7 @@ Container postAgregar(String foto) {
       ),
       child: Column(
         children: [
+          Spacer(flex: 1),
           Container(
             width: 300,
             height: 220,
@@ -72,23 +73,44 @@ Container postAgregar(String foto) {
               borderRadius: BorderRadius.all(Radius.circular(20)),
               color: Color.fromRGBO(133, 130, 229, 90),
             ),
-            //Falta buscar como insertar la foto ahí
+            child: Column(children: [
+              //Falta buscar como insertar la foto ahí
+            ]),
           ),
-          Row(children: [
-            Container(
-              width: 280,
-              height: 200,
-              margin: const EdgeInsets.only(bottom: 5, top: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.transparent),
-            ),
-          ])
+          Spacer(flex: 1)
         ],
       ));
+}
+
+Container descripcion(String texto) {
+  return Container(
+    width: 280,
+    height: 200,
+    margin: const EdgeInsets.only(bottom: 5, top: 5),
+    decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.white,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.transparent),
+    child: Column(children: [
+      camposinlinea(' ' + texto),
+    ]),
+  );
+}
+
+TextField camposinlinea(String descripcion) {
+  return TextField(
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      hintText: descripcion,
+      hintStyle: TextStyle(color: Colors.white),
+    ),
+    textAlign: TextAlign.start,
+    maxLines: null,
+    style: TextStyle(color: Colors.white),
+    autofocus: true,
+  );
 }
 
 Container post(
@@ -203,6 +225,26 @@ TextField campo(String hint) {
   );
 }
 
+TextField campoPass(String hint) {
+  return TextField(
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      hintText: hint,
+      hintStyle: TextStyle(color: Colors.white),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+    ),
+    textAlign: TextAlign.center,
+    style: TextStyle(color: Colors.white),
+    autofocus: true,
+    obscureText: true,
+  );
+}
+
 GestureDetector button(VoidCallback function, String text) {
   return GestureDetector(
     onTap: function,
@@ -224,21 +266,7 @@ GestureDetector button(VoidCallback function, String text) {
   );
 }
 
-AppBar cabeceraFlecha(String titulo) {
-  //falta colocar la flecha jiji
-  return AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(padding: const EdgeInsets.all(8.0), child: Text(titulo)),
-      ],
-    ),
-    backgroundColor: Color(0xFF031630),
-    toolbarHeight: 45,
-  );
-}
-
-AppBar cabeceraFlecha2(String titulo, BuildContext context) {
+AppBar cabeceraFlecha(String titulo, BuildContext context) {
   return AppBar(
     backgroundColor: const Color(0xFF031630),
     toolbarHeight: 45,

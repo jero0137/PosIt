@@ -16,7 +16,7 @@ class _configuracionState extends State<configuracion> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      appBar: cabeceraFlecha2('Configuración', context),
+      appBar: cabeceraFlecha('Configuración', context),
       body: Center(
         child: ListView(
           children: [
