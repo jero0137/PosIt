@@ -12,37 +12,6 @@ class perfil extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
       //AppBar
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF031630),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        toolbarHeight: 40,
-        title: Row(
-          children: [
-            Spacer(),
-            Container(
-                padding: const EdgeInsets.all(8.0), child: Text("Perfil")),
-            Spacer(),
-            IconButton(
-              icon: Icon(
-                Icons.manage_accounts_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return configuracion();
-                }));
-              },
-            )
-          ],
-        ),
-        centerTitle: true,
-        leadingWidth: 20,
-      ),
-
       //Body
       body: Center(
         child: Container(

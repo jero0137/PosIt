@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/perfil.dart';
 
-AppBar appBar(String titulo, String fotoPerfil, BuildContext context) {
+AppBar mainAppbar(String titulo, String fotoPerfil) {
   return AppBar(
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -20,24 +20,16 @@ AppBar appBar(String titulo, String fotoPerfil, BuildContext context) {
         const Spacer(
           flex: 4,
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => perfil()),
-            );
-          },
-          child: imagenCircular(
+        imagenCircular(
               fotoPerfil,
               30),
-        ),
         const Spacer(
           flex: 1,
         ),
       ],
     ),
     backgroundColor: Color.fromRGBO(133, 130, 229, 90),
-    toolbarHeight: 45,
+    toolbarHeight: 45,    
   );
 }
 

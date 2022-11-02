@@ -10,10 +10,8 @@ class Feed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
+    return Scaffold(    
       backgroundColor: Color(0xFF031630),
-      appBar: appBar("PosIT",'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740', context),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

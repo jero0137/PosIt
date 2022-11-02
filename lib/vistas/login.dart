@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:posit/vistas/Feed.dart';
 import 'package:posit/vistas/signin.dart';
 import 'package:posit/widgets/widgets.dart';
+
+import 'controlador.dart';
 
 class login extends StatelessWidget {
   const login({Key? key}) : super(key: key);
@@ -44,7 +43,7 @@ class login extends StatelessWidget {
             SizedBox(
               child: button(() {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Feed();
+                  return controlador();
                 }));
               }, "Iniciar sesion"),
             ),

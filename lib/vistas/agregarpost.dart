@@ -31,7 +31,6 @@ _imgFromGallery() async {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      appBar: cabeceraFlecha('NUEVA PUBLICACIÓN', context),
       body: Center(
         child: Column(children: [
           postAgregar(''),
