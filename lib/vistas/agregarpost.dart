@@ -32,15 +32,17 @@ _imgFromGallery() async {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
       body: Center(
-        child: Column(children: [
-          postAgregar(''),
-          descripcion('Añade una descripción'),
-          Spacer(),
-          SizedBox(
-            child: button(() {}, "Agregar post"),
-          ),
-          Spacer(),
-        ]),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            postAgregar(''),
+            descripcion('Añade una descripción'),
+           // Spacer(),
+            SizedBox(
+              child: button(() {}, "Agregar post"),
+            ),
+           // Spacer(),
+          ]),
+        ),
       ),
     );
   }

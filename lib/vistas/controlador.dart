@@ -21,7 +21,7 @@ class _controladorState extends State<controlador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppbar("PosIT",'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740'),
+      appBar: mainAppbar("PosIT",'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b'),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = (index)),
@@ -44,7 +44,7 @@ class _controladorState extends State<controlador> {
             label: 'Perfil',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.feed),
+            icon: Icon(Icons.manage_accounts),
             label: 'Configuracion',
           ),
         ],

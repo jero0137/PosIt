@@ -3,14 +3,16 @@ import 'package:posit/vistas/perfil.dart';
 
 AppBar mainAppbar(String titulo, String fotoPerfil) {
   return AppBar(
+    automaticallyImplyLeading: false,
     title: Row(
+      
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(
           flex: 1,
         ),
         Image.network(
-          'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
+          'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/Logo.png?alt=media&token=fdd54a50-f264-4a16-960b-23ad499290f9',
           height: 30,
         ),
         const SizedBox(
@@ -22,7 +24,7 @@ AppBar mainAppbar(String titulo, String fotoPerfil) {
         ),
         imagenCircular(
               fotoPerfil,
-              30),
+              40),
         const Spacer(
           flex: 1,
         ),
@@ -201,7 +203,9 @@ Container post(
 
 TextField campo(String hint) {
   return TextField(
+  
     decoration: InputDecoration(
+      
       fillColor: Colors.white,
       hintText: hint,
       hintStyle: TextStyle(color: Colors.white),
@@ -214,7 +218,7 @@ TextField campo(String hint) {
     ),
     textAlign: TextAlign.center,
     style: TextStyle(color: Colors.white),
-    autofocus: true,
+    autofocus: false,
   );
 }
 
@@ -282,7 +286,7 @@ AppBar cabecera(String titulo) {
           flex: 1,
         ),
         Image.network(
-          'https://img.freepik.com/vector-premium/papel-nota-ilustracion-icono-vector-dibujos-animados-lapiz_480044-364.jpg?w=740',
+          'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/Logo.png?alt=media&token=fdd54a50-f264-4a16-960b-23ad499290f9',
           height: 30,
         ),
         const SizedBox(
