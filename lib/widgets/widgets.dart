@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/perfil.dart';
 
 AppBar appBar(String titulo, String fotoPerfil, BuildContext context) {
   return AppBar(
@@ -23,7 +24,7 @@ AppBar appBar(String titulo, String fotoPerfil, BuildContext context) {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const perfil()),
+              MaterialPageRoute(builder: (context) => perfil()),
             );
           },
           child: imagenCircular(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:posit/vistas/configuracion.dart';
 import 'package:posit/widgets/widgets.dart';
 
 class perfil extends StatelessWidget {
@@ -30,7 +31,11 @@ class perfil extends StatelessWidget {
                 color: Colors.white,
                 size: 30,
               ),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return configuracion();
+                }));
+              },
             )
           ],
         ),

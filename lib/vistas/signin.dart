@@ -10,6 +10,7 @@ class signin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: cabecera("PosIT"),
       body: Center(
           child: Container(
@@ -40,7 +41,11 @@ class signin extends StatelessWidget {
               flex: 2,
             ),
             SizedBox(
-              child: button(() {}, "Registrarse"),
+              child: button(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return login();
+                }));
+              }, "Registrarse"),
             ),
             SizedBox(
               height: 10,

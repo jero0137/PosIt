@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:posit/vistas/signin.dart';
 import 'package:posit/widgets/widgets.dart';
 
 class login extends StatelessWidget {
@@ -10,6 +9,7 @@ class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: cabecera("PosIT"),
       body: Center(
           child: Container(
@@ -22,10 +22,11 @@ class login extends StatelessWidget {
             Row(
               children: [
                 Spacer(),
-                Icon(
-                  Icons.account_circle_sharp,
-                  size: 200,
-                  color: Color.fromARGB(255, 255, 255, 255),
+                Image.network(
+                  'https://assets.stickpng.com/images/585e4beacb11b227491c3399.png',
+                  fit: BoxFit.contain,
+                  height: 142,
+                  width: 152,
                 ),
                 Spacer()
               ],
@@ -56,32 +57,6 @@ class login extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                SizedBox(
-                    child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return signin();
-                      }),
-                    );
-                  },
-                  child: Container(
-                    width: 100,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF031630),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Center(
-                        child: Text("Registrarse",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                color: Color(0xFF8582E5),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14))),
-                  ),
-                )),
                 Spacer()
               ],
             ),
