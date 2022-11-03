@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:posit/provider/usuario.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/providers/user.dart';
 import '../widgets/widgets.dart';
 
 class configuracion extends StatefulWidget {
@@ -26,7 +29,7 @@ class _configuracionState extends State<configuracion> {
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo('Julian Ortiz'),
+                  child: campo(context.watch<User>().usuario),
                 ),
                 SizedBox(
                   height: 20,

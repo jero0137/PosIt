@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:posit/vistas/Feed.dart';
-import 'package:posit/vistas/agregarpost.dart';
-import 'package:posit/vistas/comentario.dart';
-import 'package:posit/vistas/configuracion.dart';
-import 'package:posit/vistas/editarpost.dart';
+import 'package:posit/provider/usuario.dart';
 import 'package:posit/vistas/login.dart';
-import 'package:posit/vistas/signin.dart';
+import 'package:provider/provider.dart';
+
+import 'provider/providers/user.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => User(),
+        ),
+        
+      ],
+      child: const MyApp(),
+      )
+      ,
+      
+  );
 }
 
 class MyApp extends StatelessWidget {

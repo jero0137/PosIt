@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:posit/provider/usuario.dart';
 import 'package:posit/vistas/configuracion.dart';
 import 'package:posit/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/providers/user.dart';
 
 class perfil extends StatelessWidget {
   perfil({Key? key}) : super(key: key);
@@ -23,15 +27,19 @@ class perfil extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              
               SizedBox(
-                child: Text(
-                  "UserName",
+                child: 
+                Text(
+                  context.watch<User>().usuario,
                   style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
               ),
+              
+
               SizedBox(
                 height: 30,
               ),
