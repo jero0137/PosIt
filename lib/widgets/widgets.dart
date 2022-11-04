@@ -105,7 +105,7 @@ TextField camposinlinea(String descripcion) {
     textAlign: TextAlign.start,
     maxLines: null,
     style: TextStyle(color: Colors.white),
-    autofocus: true,
+    autofocus: false,
   );
 }
 
@@ -241,7 +241,7 @@ TextField campoPass(String hint) {
     ),
     textAlign: TextAlign.center,
     style: TextStyle(color: Colors.white),
-    autofocus: true,
+    autofocus: false,
     obscureText: true,
   );
 }
@@ -336,7 +336,10 @@ Container comentarios(String foto, String usuario, String texto) {
             ],
           ),
           Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              
               Text(
                 usuario,
                 style: TextStyle(color: Colors.white, fontSize: 20),
