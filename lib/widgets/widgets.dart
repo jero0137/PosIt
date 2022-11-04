@@ -77,10 +77,11 @@ Container postAgregar(String foto) {
       ));
 }
 
+
 Container descripcion(String texto) {
   return Container(
-    width: 280,
-    height: 200,
+    width: 320,
+    height: 240,
     margin: const EdgeInsets.only(bottom: 5, top: 5),
     decoration: BoxDecoration(
         border: Border.all(
@@ -89,20 +90,25 @@ Container descripcion(String texto) {
         borderRadius: BorderRadius.all(Radius.circular(20)),
         color: Colors.transparent),
     child: Column(children: [
+      SizedBox(
+        height: 10,
+      ),
       camposinlinea(' ' + texto),
+      
     ]),
   );
 }
 
 TextField camposinlinea(String descripcion) {
   return TextField(
-    decoration: InputDecoration(
+    decoration: InputDecoration.collapsed(
       fillColor: Colors.white,
       hintText: descripcion,
       hintStyle: TextStyle(color: Colors.white),
     ),
     textAlign: TextAlign.start,
     maxLines: null,
+    
     style: TextStyle(color: Colors.white),
     autofocus: true,
   );
@@ -336,13 +342,16 @@ Container comentarios(String foto, String usuario, String texto) {
               Text(
                 usuario,
                 style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.left,
               ),
               Text(
                 texto,
                 style: TextStyle(color: Colors.white, fontSize: 17),
+                textAlign: TextAlign.left,
               )
             ],
           )
         ],
-      ));
+      )
+  );
 }
