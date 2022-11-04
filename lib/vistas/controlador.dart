@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/agregarpost.dart';
 import 'package:posit/vistas/configuracion.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/providers/user.dart';
 import '../widgets/widgets.dart';
 import 'Feed.dart';
 import 'perfil.dart';
@@ -21,7 +23,7 @@ class _controladorState extends State<controlador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppbar("PosIT",'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b'),
+      appBar: mainAppbar("PosIT",context.watch<User>().getFoto()),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = (index)),

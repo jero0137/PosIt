@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/comentario.dart';
 import 'package:posit/vistas/perfil.dart';
 
 AppBar mainAppbar(String titulo, String fotoPerfil) {
   return AppBar(
     automaticallyImplyLeading: false,
     title: Row(
-      
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(
@@ -22,16 +22,14 @@ AppBar mainAppbar(String titulo, String fotoPerfil) {
         const Spacer(
           flex: 4,
         ),
-        imagenCircular(
-              fotoPerfil,
-              40),
+        imagenCircular(fotoPerfil, 40),
         const Spacer(
           flex: 1,
         ),
       ],
     ),
     backgroundColor: Color.fromRGBO(133, 130, 229, 90),
-    toolbarHeight: 45,    
+    toolbarHeight: 45,
   );
 }
 
@@ -77,7 +75,6 @@ Container postAgregar(String foto) {
       ));
 }
 
-
 Container descripcion(String texto) {
   return Container(
     width: 320,
@@ -94,7 +91,6 @@ Container descripcion(String texto) {
         height: 10,
       ),
       camposinlinea(' ' + texto),
-      
     ]),
   );
 }
@@ -108,14 +104,13 @@ TextField camposinlinea(String descripcion) {
     ),
     textAlign: TextAlign.start,
     maxLines: null,
-    
     style: TextStyle(color: Colors.white),
     autofocus: true,
   );
 }
 
-Container post(
-    String fotoPerfil, String usuario, String fotoPost, int cantidadLikes) {
+Container post(String fotoPerfil, String usuario, String fotoPost,
+    int cantidadLikes, int cantidadComentarios,BuildContext context) {
   return Container(
     width: 350,
     height: 390,
@@ -163,7 +158,7 @@ Container post(
               flex: 1,
             ),
             Image.network(
-              'https://www.pngmart.com/files/15/Valentines-Day-Heart-Red-PNG.png',
+              'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
               width: 30,
               height: 30,
             ),
@@ -177,16 +172,21 @@ Container post(
             const Spacer(
               flex: 2,
             ),
-            Image.network(
-              'https://www.pngmart.com/files/15/Valentines-Day-Heart-Red-PNG.png',
-              width: 30,
-              height: 30,
+            GestureDetector(
+              onTap: () => {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const comentario()))
+              },
+              child: Image.network(
+                'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',
+                width: 30,
+                height: 30,
+              ),
             ),
             const SizedBox(
               width: 6,
             ),
             Text(
-              '$cantidadLikes',
+              '$cantidadComentarios',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             const Spacer(
@@ -209,9 +209,7 @@ Container post(
 
 TextField campo(String hint) {
   return TextField(
-  
     decoration: InputDecoration(
-      
       fillColor: Colors.white,
       hintText: hint,
       hintStyle: TextStyle(color: Colors.white),
@@ -352,6 +350,5 @@ Container comentarios(String foto, String usuario, String texto) {
             ],
           )
         ],
-      )
-  );
+      ));
 }

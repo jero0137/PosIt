@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:posit/provider/usuario.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:provider/provider.dart';
-
 import 'provider/providers/user.dart';
 
 

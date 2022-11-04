@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:posit/provider/usuario.dart';
-import 'package:posit/vistas/configuracion.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/providers/user.dart';
 
 class perfil extends StatelessWidget {
@@ -31,7 +26,7 @@ class perfil extends StatelessWidget {
               SizedBox(
                 child: 
                 Text(
-                  context.watch<User>().usuario,
+                  context.watch<User>().getNombre(),
                   style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,
@@ -44,7 +39,7 @@ class perfil extends StatelessWidget {
                 height: 30,
               ),
               imagenCircular(
-                  'https://preview.redd.it/4it14bdxt4d81.jpg?auto=webp&s=401898ae73f8ccc53d8d921cf0c38540eade4b28',
+                  context.watch<User>().getFoto(),
                   150),
               SizedBox(
                 height: 20,
@@ -78,22 +73,22 @@ class perfil extends StatelessWidget {
                   'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   'Jen0101010',
                   'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10),
+                  10,5,context),
               post(
                   'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   'Jen0101010',
                   'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10),
+                  10,5,context),
               post(
                   'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   'Jen0101010',
                   'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10),
+                  10,5,context),
               post(
                   'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   'Jen0101010',
                   'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10),
+                  10,5,context),
             ]),
           ),
         ),
