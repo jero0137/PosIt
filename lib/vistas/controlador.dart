@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/agregarpost.dart';
 import 'package:posit/vistas/configuracion.dart';
+import 'package:posit/widgets/mainAppBar.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/providers/user.dart';
@@ -23,7 +24,7 @@ class _controladorState extends State<controlador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: mainAppbar("PosIT",context.watch<User>().getFoto()),
+      appBar:  mainAppBar(titulo: 'PoSit', fotoPerfil: context.watch<User>().getFoto() ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = (index)),

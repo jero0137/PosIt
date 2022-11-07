@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
 
+import '../widgets/campoFormulario.dart';
+
 class signin extends StatelessWidget {
   const signin({Key? key}) : super(key: key);
 
@@ -22,21 +24,21 @@ class signin extends StatelessWidget {
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campo("Ingrese nombre completo")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su nombre Completo')),
             Spacer(flex: 2),
-            SizedBox(width: 257, child: campo("Ingrese un correo")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese un correo')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campo("Ingrese un usuario")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese un usuario')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoPass("Ingrese una contraseña")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese una contraseña')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoPass("Confirme contraseña")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Confirme la contraseña')),
             Spacer(
               flex: 2,
             ),

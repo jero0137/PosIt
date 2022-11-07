@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:posit/widgets/imagenCircular.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../provider/providers/user.dart';
+import '../widgets/post.dart';
 
 class perfil extends StatelessWidget {
   perfil({Key? key}) : super(key: key);
@@ -22,10 +24,8 @@ class perfil extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              
               SizedBox(
-                child: 
-                Text(
+                child: Text(
                   context.watch<User>().getNombre(),
                   style: TextStyle(
                       fontSize: 24,
@@ -33,14 +33,11 @@ class perfil extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              
-
               SizedBox(
                 height: 30,
               ),
               imagenCircular(
-                  context.watch<User>().getFoto(),
-                  150),
+                  width: 150, imagen: context.watch<User>().getFoto()),
               SizedBox(
                 height: 20,
               ),
@@ -70,25 +67,35 @@ class perfil extends StatelessWidget {
                 height: 20,
               ),
               post(
-                  'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
-                  'Jen0101010',
-                  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10,5,context),
+                  fotoPerfil:
+                      'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
+                  usuario: 'Jen0101010',
+                  fotoPost:
+                      'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
+                  cantidadLikes: 9,
+                  cantidadComentarios: 8,
+                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  context: context),
               post(
-                  'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
-                  'Jen0101010',
-                  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10,5,context),
+                  fotoPerfil:
+                      'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
+                  usuario: 'Jen0101010',
+                  fotoPost:
+                      'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
+                  cantidadLikes: 9,
+                  cantidadComentarios: 8,
+                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  context: context),
               post(
-                  'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
-                  'Jen0101010',
-                  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10,5,context),
-              post(
-                  'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
-                  'Jen0101010',
-                  'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
-                  10,5,context),
+                  fotoPerfil:
+                      'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
+                  usuario: 'Jen0101010',
+                  fotoPost:
+                      'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
+                  cantidadLikes: 9,
+                  cantidadComentarios: 8,
+                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  context: context)
             ]),
           ),
         ),

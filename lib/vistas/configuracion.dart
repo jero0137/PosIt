@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posit/widgets/campoFormulario.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/providers/user.dart';
@@ -26,35 +27,35 @@ class _configuracionState extends State<configuracion> {
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo(context.watch<User>().getNombre()),
+                  child: campoFormulario(hint: context.watch<User>().getNombre(),),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo(context.watch<User>().getCorreo()),
+                  child: campoFormulario(hint: context.watch<User>().getCorreo(),),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo(context.watch<User>().getUsuario()),
+                  child: campoFormulario(hint: context.watch<User>().getUsuario(),),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo('Contraseña'),
+                  child: campoFormulario(hint: 'Contraseña',),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 SizedBox(
                   width: 257,
-                  child: campo('Nueva Contraseña'),
+                  child: campoFormulario(hint: 'Nueva contraseña'),
                 ),
                 SizedBox(
                   height: 20,

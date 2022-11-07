@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/signin.dart';
+import 'package:posit/widgets/campoFormulario.dart';
 import 'package:posit/widgets/widgets.dart';
 
 import 'controlador.dart';
@@ -34,9 +35,9 @@ class login extends StatelessWidget {
             Spacer(
               flex: 1,
             ),
-            SizedBox(width: 257, child: campo("Ingrese su usuario")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su usuario')),
             Spacer(),
-            SizedBox(width: 257, child: campo("Ingrese su contraseña")),
+            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su contraseña')),
             Spacer(
               flex: 2,
             ),
