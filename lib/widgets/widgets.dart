@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:posit/vistas/comentario.dart';
 import 'package:posit/widgets/imagenCircular.dart';
 
-
 Container postAgregar(String foto) {
   return Container(
       width: 320,
@@ -72,27 +71,6 @@ TextField camposinlinea(String descripcion) {
   );
 }
 
-
-TextField campoPass(String hint) {
-  return TextField(
-    decoration: InputDecoration(
-      fillColor: Colors.white,
-      hintText: hint,
-      hintStyle: TextStyle(color: Colors.white),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.white),
-      ),
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.white),
-      ),
-    ),
-    textAlign: TextAlign.center,
-    style: TextStyle(color: Colors.white),
-    autofocus: false,
-    obscureText: true,
-  );
-}
-
 GestureDetector button(VoidCallback function, String text) {
   return GestureDetector(
     onTap: function,
@@ -128,35 +106,6 @@ AppBar cabeceraFlecha(String titulo, BuildContext context) {
   );
 }
 
-AppBar cabecera(String titulo) {
-  return AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Spacer(
-          flex: 1,
-        ),
-        Image.network(
-          'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/Logo.png?alt=media&token=fdd54a50-f264-4a16-960b-23ad499290f9',
-          height: 30,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Container(padding: const EdgeInsets.all(8.0), child: Text(titulo)),
-        const Spacer(
-          flex: 4,
-        ),
-        const Spacer(
-          flex: 1,
-        ),
-      ],
-    ),
-    backgroundColor: Color(0xFF031630),
-    toolbarHeight: 45,
-  );
-}
-
 Container comentarios(String foto, String usuario, String texto) {
   return Container(
       width: 300,
@@ -186,7 +135,6 @@ Container comentarios(String foto, String usuario, String texto) {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
               Text(
                 usuario,
                 style: TextStyle(color: Colors.white, fontSize: 20),

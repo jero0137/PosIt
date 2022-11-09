@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
 
+import '../widgets/cabecera.dart';
 import '../widgets/campoFormulario.dart';
 
 class signin extends StatelessWidget {
@@ -13,7 +14,9 @@ class signin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: cabecera("PosIT"),
+      appBar: cabecera(
+        titulo: 'PosIT',
+      ),
       body: Center(
           child: Container(
         decoration: BoxDecoration(
@@ -24,21 +27,29 @@ class signin extends StatelessWidget {
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su nombre Completo')),
+            SizedBox(
+                width: 257,
+                child: campoFormulario(hint: 'Ingrese su nombre Completo')),
             Spacer(flex: 2),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese un correo')),
+            SizedBox(
+                width: 257, child: campoFormulario(hint: 'Ingrese un correo')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese un usuario')),
+            SizedBox(
+                width: 257, child: campoFormulario(hint: 'Ingrese un usuario')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese una contraseña')),
+            SizedBox(
+                width: 257,
+                child: campoFormulario(hint: 'Ingrese una contraseña')),
             Spacer(
               flex: 2,
             ),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Confirme la contraseña')),
+            SizedBox(
+                width: 257,
+                child: campoFormulario(hint: 'Confirme la contraseña')),
             Spacer(
               flex: 2,
             ),

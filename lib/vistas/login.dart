@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/signin.dart';
 import 'package:posit/widgets/campoFormulario.dart';
+import 'package:posit/widgets/campoPass.dart';
 import 'package:posit/widgets/widgets.dart';
 
+import '../widgets/cabecera.dart';
 import 'controlador.dart';
 
 class login extends StatelessWidget {
@@ -12,7 +14,9 @@ class login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: cabecera("PosIT"),
+      appBar: cabecera(
+        titulo: "PosIT",
+      ),
       body: Center(
           child: Container(
         decoration: BoxDecoration(
@@ -35,9 +39,11 @@ class login extends StatelessWidget {
             Spacer(
               flex: 1,
             ),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su usuario')),
+            SizedBox(
+                width: 257, child: campoFormulario(hint: 'Ingrese su usuario')),
             Spacer(),
-            SizedBox(width: 257, child: campoFormulario(hint: 'Ingrese su contraseña')),
+            SizedBox(
+                width: 257, child: campoPass(hint: 'Ingrese su contraseña')),
             Spacer(
               flex: 2,
             ),

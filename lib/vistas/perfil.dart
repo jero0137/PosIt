@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/imagenCircular.dart';
-import 'package:posit/widgets/widgets.dart';
-import 'package:provider/provider.dart';
-import '../provider/providers/user.dart';
+import 'package:posit/widgets/postPerfil.dart';
 import '../widgets/post.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/providers/user.dart';
 
 class perfil extends StatelessWidget {
   perfil({Key? key}) : super(key: key);
@@ -12,7 +14,8 @@ class perfil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF031630),
-      //AppBar
+      //AppBar,
+
       //Body
       body: Center(
         child: Container(
@@ -44,18 +47,8 @@ class perfil extends StatelessWidget {
               SizedBox(
                 child: Container(
                   width: 300,
-                  //Creo que queda mejor sin borde
-                  /*
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        */
                   child: Text(
-                    "Chococrispi con yogurt de guayaban",
+                    context.watch<User>().getDescripcion(),
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
@@ -66,7 +59,7 @@ class perfil extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              post(
+              postPerfil(
                   fotoPerfil:
                       'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   usuario: 'Jen0101010',
@@ -74,9 +67,10 @@ class perfil extends StatelessWidget {
                       'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
                   cantidadLikes: 9,
                   cantidadComentarios: 8,
-                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  descripcion:
+                      'Texto de prueba para un post, foto posando para un post',
                   context: context),
-              post(
+              postPerfil(
                   fotoPerfil:
                       'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   usuario: 'Jen0101010',
@@ -84,9 +78,10 @@ class perfil extends StatelessWidget {
                       'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
                   cantidadLikes: 9,
                   cantidadComentarios: 8,
-                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  descripcion:
+                      'Texto de prueba para un post, foto posando para un post',
                   context: context),
-              post(
+              postPerfil(
                   fotoPerfil:
                       'https://img.freepik.com/fotos-premium/joven-mujer-bonita-caucasica-blanco_1187-75943.jpg?w=2000',
                   usuario: 'Jen0101010',
@@ -94,7 +89,8 @@ class perfil extends StatelessWidget {
                       'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
                   cantidadLikes: 9,
                   cantidadComentarios: 8,
-                  descripcion: 'Texto de prueba para un post, foto posando para un post',
+                  descripcion:
+                      'Texto de prueba para un post, foto posando para un post',
                   context: context)
             ]),
           ),
