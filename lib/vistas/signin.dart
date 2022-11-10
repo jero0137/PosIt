@@ -1,63 +1,176 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:posit/provider/providers/user.dart';
+import 'package:posit/utils/Authentication.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../utils/Functions.dart';
 import '../widgets/cabecera.dart';
 import '../widgets/campoFormulario.dart';
+import 'controlador.dart';
 
 class signin extends StatelessWidget {
-  const signin({Key? key}) : super(key: key);
+  signin({Key? key}) : super(key: key);
+
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerPass = TextEditingController();
+  final TextEditingController _controllerConfirmarPass =
+      TextEditingController();
+  final TextEditingController _controllerUsuario = TextEditingController();
+  final TextEditingController _controllerNombre = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: cabecera(
+      appBar: const cabecera(
         titulo: 'PosIT',
       ),
       body: Center(
           child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFF031630),
         ),
         child: Column(
           children: [
+            const Spacer(
+              flex: 2,
+            ),
+            SizedBox(
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese su nombre completo',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                controller: _controllerNombre,
+              ),
+            ),
+            const Spacer(flex: 2),
+            SizedBox(
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese un correo',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                controller: _controllerEmail,
+              ),
+            ),
             Spacer(
               flex: 2,
             ),
             SizedBox(
-                width: 257,
-                child: campoFormulario(hint: 'Ingrese su nombre Completo')),
-            Spacer(flex: 2),
-            SizedBox(
-                width: 257, child: campoFormulario(hint: 'Ingrese un correo')),
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese un usuario',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                controller: _controllerUsuario,
+              ),
+            ),
             Spacer(
               flex: 2,
             ),
             SizedBox(
-                width: 257, child: campoFormulario(hint: 'Ingrese un usuario')),
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese una contraseña',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                obscureText: true,
+                controller: _controllerPass,
+              ),
+            ),
             Spacer(
               flex: 2,
             ),
             SizedBox(
-                width: 257,
-                child: campoFormulario(hint: 'Ingrese una contraseña')),
-            Spacer(
-              flex: 2,
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Confirme la contraseña',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                obscureText: true,
+                controller: _controllerConfirmarPass,
+              ),
             ),
-            SizedBox(
-                width: 257,
-                child: campoFormulario(hint: 'Confirme la contraseña')),
             Spacer(
               flex: 2,
             ),
             SizedBox(
               child: button(() {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return login();
-                }));
+                if (Functions.contrasenasIguales(
+                    _controllerPass.text, _controllerConfirmarPass.text)) {
+                  Authentication.register(
+                    email: _controllerEmail.text,
+                    nombre: _controllerNombre.text,
+                    pass: _controllerPass.text,
+                    usuario: _controllerUsuario.text,
+                  );
+
+                  //context.read<User>().Inicializar();
+
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return controlador();
+                  }));
+                } else {}
               }, "Registrarse"),
             ),
             SizedBox(

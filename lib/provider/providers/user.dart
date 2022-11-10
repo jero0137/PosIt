@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:posit/utils/Database.dart';
 
 class User with ChangeNotifier, DiagnosticableTreeMixin {
-  String _nombre = 'Julian Ortiz Uribe';
-  String _usuario = 'Ortiz_Uribe';
-  String _correo = 'Julian@gmail.com';
+  String _nombre = '';
+  String _usuario = '';
+  String _correo = '';
   String _linkFoto =
       'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b';
   String descripcion = 'Me gusta la papaya';
+
+
+  void Inicializar(){
+    Map<String,dynamic> valores = Database.readInfoUser();
+     setNombre(valores['ortiz_j']);
+     setUsuario(valores['Usuario']);
+     setCorreo(valores['email']);
+  }
+
 
   void setNombre(String nuevoNombre) {
     _nombre = nuevoNombre;

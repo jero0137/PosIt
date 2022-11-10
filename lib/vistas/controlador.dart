@@ -5,7 +5,6 @@ import 'package:posit/widgets/mainAppBar.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/providers/user.dart';
-import '../widgets/widgets.dart';
 import 'Feed.dart';
 import 'perfil.dart';
 
@@ -23,7 +22,8 @@ class _controladorState extends State<controlador> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+    child : Scaffold(
       appBar:  mainAppBar(titulo: 'PoSit', fotoPerfil: context.watch<User>().getFoto() ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
@@ -53,7 +53,9 @@ class _controladorState extends State<controlador> {
         ],
       ),
       body: screens[currentIndex],
-    
+
+    ),
+    onWillPop: () async => false,
     );
   }
 }
