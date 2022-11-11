@@ -2,6 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/providers/user.dart';
 
 class agregarpost extends StatelessWidget {
   const agregarpost({super.key});
@@ -39,6 +42,7 @@ _imgFromGallery() async {
            // Spacer(),
             SizedBox(
               child: button(() {}, "Agregar post"),
+
             ),
            // Spacer(),
           ]),

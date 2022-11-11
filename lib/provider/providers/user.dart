@@ -13,7 +13,7 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
 
   void Inicializar(){
     Map<String,dynamic> valores = Database.readInfoUser();
-     setNombre(valores['ortiz_j']);
+     setNombre(valores['name']);
      setUsuario(valores['Usuario']);
      setCorreo(valores['email']);
   }

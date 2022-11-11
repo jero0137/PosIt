@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:posit/provider/providers/user.dart';
 import 'package:posit/utils/Authentication.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
-import 'package:provider/provider.dart';
-
 import '../utils/Functions.dart';
 import '../widgets/cabecera.dart';
-import '../widgets/campoFormulario.dart';
 import 'controlador.dart';
 
 class signin extends StatelessWidget {
@@ -156,21 +151,31 @@ class signin extends StatelessWidget {
             ),
             SizedBox(
               child: button(() {
-                if (Functions.contrasenasIguales(
-                    _controllerPass.text, _controllerConfirmarPass.text)) {
-                  Authentication.register(
-                    email: _controllerEmail.text,
-                    nombre: _controllerNombre.text,
-                    pass: _controllerPass.text,
-                    usuario: _controllerUsuario.text,
-                  );
+                try {  
+                  if (Functions.contrasenasIguales(
+                      _controllerPass.text, _controllerConfirmarPass.text)) {
+                    Authentication.register(
+                      email: _controllerEmail.text,
+                      nombre: _controllerNombre.text,
+                      pass: _controllerPass.text,
+                      usuario: _controllerUsuario.text,
+                    );
 
-                  //context.read<User>().Inicializar();
 
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return controlador();
-                  }));
-                } else {}
+                    //context.read<User>().Inicializar();
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return controlador();
+                    }));
+  
+                  } else {
+                    showAlertDialog(context,'Las contraseñas no son iguales');
+                  }
+                }on FirebaseAuthException catch (e) {
+                  print('Failed with error code: ${e.code}');
+                  print(e.message);
+                  showAlertDialog(context,e.message);
+                } 
               }, "Registrarse"),
             ),
             SizedBox(
@@ -222,4 +227,31 @@ class signin extends StatelessWidget {
       )),
     );
   }
+  
+}
+
+showAlertDialog(BuildContext context,String? mensaje) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {Navigator.of(context).pop(); },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Alerta"),
+    content: Text(mensaje!),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
