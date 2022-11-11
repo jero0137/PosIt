@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/utils/Authentication.dart';
+import 'package:posit/utils/Database.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
 import '../utils/Functions.dart';
@@ -151,31 +152,20 @@ class signin extends StatelessWidget {
             ),
             SizedBox(
               child: button(() {
-                try {  
+                try {
                   if (Functions.contrasenasIguales(
                       _controllerPass.text, _controllerConfirmarPass.text)) {
                     Authentication.register(
-                      email: _controllerEmail.text,
-                      nombre: _controllerNombre.text,
-                      pass: _controllerPass.text,
-                      usuario: _controllerUsuario.text,
-                    );
+                        email: _controllerEmail.text,
+                        nombre: _controllerNombre.text,
+                        pass: _controllerPass.text,
+                        usuario: _controllerUsuario.text,
+                        context: context);
 
-
-                    //context.read<User>().Inicializar();
-
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return controlador();
-                    }));
-  
                   } else {
-                    showAlertDialog(context,'Las contraseñas no son iguales');
+                    showSnackBar(context, 'Contraseñas iguales');
                   }
-                }on FirebaseAuthException catch (e) {
-                  print('Failed with error code: ${e.code}');
-                  print(e.message);
-                  showAlertDialog(context,e.message);
-                } 
+                } on FirebaseAuthException catch (e) {}
               }, "Registrarse"),
             ),
             SizedBox(
@@ -227,31 +217,12 @@ class signin extends StatelessWidget {
       )),
     );
   }
-  
 }
 
-showAlertDialog(BuildContext context,String? mensaje) {
-
-  // set up the button
-  Widget okButton = TextButton(
-    child: Text("OK"),
-    onPressed: () {Navigator.of(context).pop(); },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("Alerta"),
-    content: Text(mensaje!),
-    actions: [
-      okButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
+void showSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(text),
+    ),
   );
 }
