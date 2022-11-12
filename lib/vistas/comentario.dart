@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/providers/user.dart';
+import '../widgets/imagenCircular.dart';
 import '../widgets/widgets.dart';
 
 class comentario extends StatelessWidget {
@@ -64,27 +65,26 @@ class comentario extends StatelessWidget {
   }
 }
 
-/*
-Container Escribircomentario(String texto) {
-  return Container(
-    
-    width: 300,
-    height: 50,
-    margin: const EdgeInsets.only(bottom: 5, top: 5),
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: Colors.white,
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      color: Colors.transparent
+Widget camposinlinea(String descripcion) {
+  return TextField(
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      hintText: descripcion,
+      hintStyle: TextStyle(color: Colors.white),
+      enabledBorder: UnderlineInputBorder(      
+        borderSide: BorderSide(color: Colors.white),   
+      ),  
+      focusedBorder: UnderlineInputBorder(
+         borderSide: BorderSide(color: Colors.white),
+      ),  
     ),
-    child: Column(children: [
-      
-      camposinlinea(' ' + texto),
-    ]),
+    textAlign: TextAlign.start,
+    maxLines: null,
+    style: TextStyle(color: Colors.white),
+    autofocus: false,
   );
 }
-*/
+
 Widget botonConIcono(BuildContext context) {
     return Material(
       color: Colors.transparent,
@@ -102,4 +102,49 @@ Widget botonConIcono(BuildContext context) {
         ),
       ),
     );
-  }
+}
+
+Widget comentarios(String foto, String usuario, String texto) {
+  return Container(
+      width: 300,
+      height: 66,
+      margin: const EdgeInsets.only(bottom: 5, top: 5),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.transparent,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(50)),
+        color: Color.fromRGBO(133, 130, 229, 90),
+      ),
+      child: Row(
+        children: [
+          Row(
+            children: [
+              const SizedBox(
+                width: 10,
+              ),
+              imagenCircular(width: 50, imagen: foto),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                usuario,
+                style: TextStyle(color: Colors.white, fontSize: 20),
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                texto,
+                style: TextStyle(color: Colors.white, fontSize: 17),
+                textAlign: TextAlign.left,
+              )
+            ],
+          )
+        ],
+      ));
+}

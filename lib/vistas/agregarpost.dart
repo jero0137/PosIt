@@ -1,10 +1,14 @@
 //import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:posit/widgets/descripcion.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/providers/user.dart';
+import '../widgets/imagenGaleria.dart';
 
 class agregarpost extends StatelessWidget {
   const agregarpost({super.key});
@@ -37,17 +41,67 @@ _imgFromGallery() async {
       body: Center(
         child: SingleChildScrollView(
           child: Column(children: [
-            postAgregar(''),
-            descripcion('Añade una descripción'),
-           // Spacer(),
+            postAgregar(' '),
             SizedBox(
-              child: button(() {}, "Agregar post"),
+              child: descripcion(texto: 'Añade una descripción')
+            ),
+           
+            SizedBox(
+              child: imagenGaleria()
 
             ),
-           // Spacer(),
+           
           ]),
         ),
       ),
     );
   }
+}
+
+
+/*
+
+Future pickImageGallery() async{
+  
+    final image = await
+    ImagePicker().pickImage(source: ImageSource.gallery);
+    if(image==null) return;
+
+    final newImage = File(image.path);
+    
+}*/
+
+Widget postAgregar(String foto) {
+  return Container(
+      width: 320,
+      height: 240,
+      margin: const EdgeInsets.only(bottom: 5, top: 5),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.white,
+        ),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+        color: Colors.transparent,
+      ),
+      child: Column(
+        children: [
+          Spacer(flex: 1),
+          Container(
+            width: 300,
+            height: 220,
+            margin: const EdgeInsets.only(bottom: 5, top: 5),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.transparent,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              color: Color.fromRGBO(133, 130, 229, 90),
+            ),
+            child: Column(children: [
+              //Aqui va agregar foto
+            ]),
+          ),
+          Spacer(flex: 1)
+        ],
+      ));
 }

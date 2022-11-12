@@ -24,7 +24,7 @@ class _controladorState extends State<controlador> {
   Widget build(BuildContext context) {
     return WillPopScope(
     child : Scaffold(
-      appBar:  mainAppBar(titulo: 'PoSit', fotoPerfil: context.watch<User>().getFoto() ),
+      appBar:  mainAppBar(titulo: 'PosIt', fotoPerfil: context.watch<User>().getFoto() ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = (index)),
