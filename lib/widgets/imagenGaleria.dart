@@ -34,7 +34,6 @@ class _imagenGaleriaState extends State<imagenGaleria> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      imagen == null ? Center(): imagenGaleria.
     );
   }
   

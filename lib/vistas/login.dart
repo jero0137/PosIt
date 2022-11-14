@@ -3,12 +3,18 @@ import 'package:posit/vistas/signin.dart';
 import 'package:posit/widgets/campoFormulario.dart';
 import 'package:posit/widgets/campoPass.dart';
 import 'package:posit/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/providers/user.dart';
+import '../utils/Authentication.dart';
 import '../widgets/cabecera.dart';
 import 'controlador.dart';
 
 class login extends StatelessWidget {
-  const login({Key? key}) : super(key: key);
+  login({Key? key}) : super(key: key);
+
+  final TextEditingController _controllerCorreo = TextEditingController();
+  final TextEditingController _controllerPass = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +45,63 @@ class login extends StatelessWidget {
             Spacer(
               flex: 1,
             ),
+            
             SizedBox(
-                width: 257, child: campoFormulario(hint: 'Ingrese su usuario')),
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese su usuario',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                controller: _controllerCorreo,
+              ),
+            ),
             Spacer(),
             SizedBox(
-                width: 257, child: campoPass(hint: 'Ingrese su contraseña')),
+              width: 257,
+              child: TextField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  hintText: 'Ingrese su contraseña',
+                  hintStyle: TextStyle(color: Colors.white),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+                autofocus: false,
+                obscureText: true,
+                controller: _controllerPass,
+              ),
+            ),
             Spacer(
               flex: 2,
             ),
             SizedBox(
-              child: button(() {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
+              child: button(() async {
+                
+                await Authentication.signInWithEmailAndPassword(email:_controllerCorreo.text,pass:_controllerPass.text,context: context);
+                if(Authentication.entro==true){
+                  Provider.of<User>(context, listen: false).inicializar();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return controlador();
                 }));
+                }
+                
               }, "Iniciar sesion"),
             ),
             SizedBox(

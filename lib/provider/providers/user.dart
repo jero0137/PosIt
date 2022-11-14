@@ -11,8 +11,8 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   String descripcion = 'Me gusta la papaya';
 
 
-  void Inicializar(){
-    Map<String,dynamic> valores = Database.readInfoUser();
+  Future<void> inicializar() async {
+     var valores = await Database.readInfoUser();
      setNombre(valores['name']);
      setUsuario(valores['Usuario']);
      setCorreo(valores['email']);

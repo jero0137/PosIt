@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/utils/Authentication.dart';
-import 'package:posit/utils/Database.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:posit/widgets/widgets.dart';
+import 'package:provider/provider.dart';
+import '../provider/providers/user.dart';
 import '../utils/Functions.dart';
 import '../widgets/cabecera.dart';
 import 'controlador.dart';
@@ -151,21 +151,28 @@ class signin extends StatelessWidget {
               flex: 2,
             ),
             SizedBox(
-              child: button(() {
-                try {
-                  if (Functions.contrasenasIguales(
-                      _controllerPass.text, _controllerConfirmarPass.text)) {
-                    Authentication.register(
-                        email: _controllerEmail.text,
-                        nombre: _controllerNombre.text,
-                        pass: _controllerPass.text,
-                        usuario: _controllerUsuario.text,
-                        context: context);
+              child: button(() async {
+                if (Functions.contrasenasIguales(
+                    _controllerPass.text, _controllerConfirmarPass.text)) {
+                  await Authentication.register(
+                      email: _controllerEmail.text,
+                      nombre: _controllerNombre.text,
+                      pass: _controllerPass.text,
+                      usuario: _controllerUsuario.text,
+                      context: context);
 
-                  } else {
-                    showSnackBar(context, 'Contraseñas iguales');
+                  if (Authentication.entro == true) {
+
+                    Provider.of<User>(context, listen: false).inicializar();
+                    
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return controlador();
+                    }));
                   }
-                } on FirebaseAuthException catch (e) {}
+                } else {
+                  showSnackBar(context, 'Contraseñas iguales');
+                }
               }, "Registrarse"),
             ),
             SizedBox(

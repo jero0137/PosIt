@@ -24,28 +24,27 @@ class Database {
     }).catchError((e) => print(e));
   }
 
-  static Map<String,dynamic> readInfoUser() {
+  static Future<Map<String, dynamic>> readInfoUser() async {
 
     DocumentReference userInfo = _mainCollection.doc(userUid);
-
-    userInfo.get().then(
-      (DocumentSnapshot doc) {
-        final data = doc.data() as Map<String, dynamic>;
-        return data;
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
 
     String nombre = "";
     String email = "";
     String usuario = "";
-
-    Map<String, dynamic> data = <String, dynamic>{
+    Map<String, dynamic> dataa = <String, dynamic>{
       "name": nombre,
       "email": email,
       "Usuario": usuario,
     };
 
-    return data;
+    await userInfo.get().then(
+      (DocumentSnapshot doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        dataa= data;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+
+    return dataa;
   }
 }

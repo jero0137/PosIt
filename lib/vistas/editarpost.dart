@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/descripcion.dart';
 import 'package:posit/widgets/widgets.dart';
-import '../widgets/agregarEditarPost.dart';
 
 class editarpost extends StatelessWidget{
   const editarpost({super.key});

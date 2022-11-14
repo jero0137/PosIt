@@ -8,9 +8,10 @@ import 'Database.dart';
 class Authentication {
   static late User? user;
   static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static bool entro = false;
 
 
-  static void register(
+  static Future<void> register(
       {required String email,
       required String pass,
       required String nombre,
@@ -26,12 +27,13 @@ class Authentication {
 
       
       if (user != null) {
-        Database.addUser(
+        await Database.addUser(
             email: email, nombre: nombre, usuario: usuario, uid: user.uid);
+            entro= true;
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
+          context, e.message!); 
     }
 
     /* if (user != null) {
@@ -46,18 +48,21 @@ class Authentication {
     } */
   }
 
-  static void signInWithEmailAndPassword(
-      {required String email, required String pass}) async {
+  static Future<void> signInWithEmailAndPassword(
+      {required String email, required String pass,required BuildContext context}) async {
     try {
       user = (await _auth.signInWithEmailAndPassword(
         email: email,
         password: pass,
       ))
           .user;
-      print("Bienvenido");
-    } catch (error) {
-      print(error);
-      user = null;
+    
+      entro = true;
+      Database.userUid = user?.uid;
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(
+          context, e.message!); 
+          user = null;
     }
 
     /* if (user != null) {
