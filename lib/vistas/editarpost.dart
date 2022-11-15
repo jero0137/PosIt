@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/descripcion.dart';
 import 'package:posit/widgets/widgets.dart';
-
+import '';
 class editarpost extends StatelessWidget{
   const editarpost({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +58,7 @@ Widget postEditar() {
               color: Color.fromRGBO(133, 130, 229, 90),
             ),
             child: Column(children: [
-              //Aqui va la foto actual
+              
             ]),
           ),
           Spacer(flex: 1)

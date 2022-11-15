@@ -62,11 +62,19 @@ class post extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
+              //
+              GestureDetector(
+                onTap: () => {
+                  cantidadLikes: cantidadLikes+1,
+                },
+                child: Image.network(
+                  'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
                 width: 30,
                 height: 30,
               ),
+              ),
+              //
+             
               const SizedBox(
                 width: 6,
               ),
@@ -80,9 +88,11 @@ class post extends StatelessWidget {
               GestureDetector(
                 onTap: () => {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const comentario()))
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const comentario()
+                    )
+                  )
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',

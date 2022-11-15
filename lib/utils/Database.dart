@@ -1,10 +1,16 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../provider/providers/user.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
+final CollectionReference _postCollection = _firestore.collection('post');
 
 class Database {
   static String? userUid;
+  static String? postPid;
 
   static Future<void> addUser(
       {required String email,
@@ -24,6 +30,27 @@ class Database {
     }).catchError((e) => print(e));
   }
 
+  static Future<void> addPost(
+    {required String usuario,
+    required String fotoPost,
+    required String fotoperfil,
+    required String descripcion,}) async{
+      DocumentReference referencerPost = _postCollection.doc();
+
+      Map<String, dynamic> data = <String, dynamic>{
+        "usuario": userUid,
+        "fotoperfil": fotoperfil,
+        "foto": fotoPost,
+        "descripcion": descripcion,
+        "nombreUsuario": usuario,
+      };
+      await referencerPost.set(data).whenComplete(() {
+        print('Se agregó el post');
+
+      }).catchError((e) => print(e));
+    }
+
+  
   static Future<Map<String, dynamic>> readInfoUser() async {
 
     DocumentReference userInfo = _mainCollection.doc(userUid);

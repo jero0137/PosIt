@@ -1,39 +1,27 @@
-//import 'dart:html';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:posit/utils/Database.dart';
+import 'package:posit/utils/pick_image.dart';
 import 'package:posit/widgets/descripcion.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import '../provider/providers/user.dart';
-import '../widgets/imagenGaleria.dart';
+import '../widgets/campoLinea.dart';
 
-class agregarpost extends StatelessWidget {
-  const agregarpost({super.key});
+class agregarpost extends StatefulWidget {
+  
+   agregarpost({super.key});
+  final TextEditingController _controllerDescripcion = TextEditingController();
 
-/*
-  imgFromCamera() async {
-    
-  File image = await ImagePicker.pickImage(
-      source: ImageSource.camera, imageQuality: 50
-  );
-  setState(() {
-    image = image;
-  });
+  @override
+  State<agregarpost> createState() => _agregarpostState();
 }
 
-_imgFromGallery() async {
-  File image = await ImagePicker.pickImage(
-      source: ImageSource.gallery, imageQuality: 50
-  );
+class _agregarpostState extends State<agregarpost> {
 
-  setState(() {
-    image = image;
-  });
-}
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,14 +29,38 @@ _imgFromGallery() async {
       body: Center(
         child: SingleChildScrollView(
           child: Column(children: [
-            postAgregar(' '),
+            postAgregar(),
             SizedBox(
-              child: descripcion(texto: 'Añade una descripción')
+              //child: descripcion(texto: 'Añade una descripción')
+              child: Container(
+                width: 320,
+                height: 240,
+                margin: const EdgeInsets.only(bottom: 5, top: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.transparent),
+                child: Column(children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(child:campoLinea (descripcion: 'Añade una descripción'))
+                  
+                ]),
+              )
+
             ),
+            SizedBox(height: 20),
            
             SizedBox(
-              child: imagenGaleria()
-
+              child: button(() async {
+                showSnackBar(context, 'Contraseñas iguales');
+                Database.addPost(usuario: context.watch<User>().getNombre(), 
+                fotoPost: 'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000', 
+                fotoperfil: context.watch<User>().getFoto(), 
+                descripcion: 'holaa'); }, "Añadir"),
             ),
            
           ]),
@@ -59,19 +71,7 @@ _imgFromGallery() async {
 }
 
 
-/*
-
-Future pickImageGallery() async{
-  
-    final image = await
-    ImagePicker().pickImage(source: ImageSource.gallery);
-    if(image==null) return;
-
-    final newImage = File(image.path);
-    
-}*/
-
-Widget postAgregar(String foto) {
+Widget postAgregar() {
   return Container(
       width: 320,
       height: 240,
@@ -98,10 +98,45 @@ Widget postAgregar(String foto) {
               color: Color.fromRGBO(133, 130, 229, 90),
             ),
             child: Column(children: [
-              //Aqui va agregar foto
+              SizedBox(
+                height: 70,
+              ),
+              SizedBox(
+                child: botonFoto(),
+              )
+                  
+                
             ]),
           ),
           Spacer(flex: 1)
         ],
       ));
+}
+
+Widget botonFoto() {
+    return GestureDetector(
+    child: Container(
+      child: Center(
+        child: Ink(
+          decoration: const ShapeDecoration(
+            shape: CircleBorder(),
+          ),
+          child: IconButton(
+            iconSize: 50.0,
+            icon: const Icon(Icons.photo),
+            color: Colors.white,
+            onPressed: () {
+              PickImage.pickImageGallery(source: ImageSource.gallery).then((File){});},
+          ),
+        ),
+      ),
+    )
+  );
+}
+void showSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(text),
+    ),
+  );
 }
