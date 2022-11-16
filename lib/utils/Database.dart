@@ -15,6 +15,7 @@ class Database {
   static Future<void> addUser(
       {required String email,
       required String uid,
+      required String descripcion,
       required String nombre,
       required String usuario}) async {
     DocumentReference referencer = _mainCollection.doc(uid);
@@ -23,6 +24,7 @@ class Database {
       "name": nombre,
       "email": email,
       "Usuario": usuario,
+      "descripcion" : descripcion,
     };
     await referencer.set(data).whenComplete(() {
       userUid = uid;
@@ -58,10 +60,12 @@ class Database {
     String nombre = "";
     String email = "";
     String usuario = "";
+    String descripcion = "";
     Map<String, dynamic> dataa = <String, dynamic>{
       "name": nombre,
       "email": email,
       "Usuario": usuario,
+      "descripcion" : descripcion,
     };
 
     await userInfo.get().then(

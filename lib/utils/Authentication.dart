@@ -16,6 +16,7 @@ class Authentication {
       required String pass,
       required String nombre,
       required String usuario,
+      required String descripcion,
       required BuildContext context}) async {
     try {
       final User? user = (await _auth.createUserWithEmailAndPassword(
@@ -28,7 +29,7 @@ class Authentication {
       
       if (user != null) {
         await Database.addUser(
-            email: email, nombre: nombre, usuario: usuario, uid: user.uid);
+            email: email,descripcion: descripcion ,nombre: nombre, usuario: usuario, uid: user.uid);
             entro= true;
       }
     } on FirebaseAuthException catch (e) {
