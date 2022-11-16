@@ -45,6 +45,8 @@ class Database {
         "foto": fotoPost,
         "descripcion": descripcion,
         "nombreUsuario": usuario,
+        "cantidadLikes": 0,
+        "cantidadComentarios" : 0,
       };
       await referencerPost.set(data).whenComplete(() {
         print('Se agregó el post');
@@ -78,4 +80,12 @@ class Database {
 
     return dataa;
   }
+
+  static Stream<QuerySnapshot> readPost() {
+    CollectionReference infopostCollection =
+      _postCollection;
+
+    return infopostCollection.snapshots();
+  }
+
 }
