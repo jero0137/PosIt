@@ -12,18 +12,18 @@ import '../provider/providers/user.dart';
 import '../widgets/campoLinea.dart';
 
 class agregarpost extends StatefulWidget {
-  
-   agregarpost({super.key});
-  final TextEditingController _controllerDescripcion = TextEditingController();
+  agregarpost({super.key});
 
   @override
   State<agregarpost> createState() => _agregarpostState();
 }
 
 class _agregarpostState extends State<agregarpost> {
-
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controllerDescripcion = TextEditingController();
+    var nombre = context.watch<User>().getNombre();
+    var foto = context.watch<User>().getFoto();
     return Scaffold(
       backgroundColor: Color(0xFF031630),
       body: Center(
@@ -31,45 +31,54 @@ class _agregarpostState extends State<agregarpost> {
           child: Column(children: [
             postAgregar(),
             SizedBox(
-              //child: descripcion(texto: 'Añade una descripción')
-              child: Container(
-                width: 320,
-                height: 240,
-                margin: const EdgeInsets.only(bottom: 5, top: 5),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.transparent),
-                child: Column(children: [
-                  SizedBox(
-                    height: 10,
+                //child: descripcion(texto: 'Añade una descripción')
+                child: Container(
+              width: 320,
+              height: 240,
+              margin: const EdgeInsets.only(bottom: 5, top: 5),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
                   ),
-                  SizedBox(child:campoLinea (descripcion: 'Añade una descripción'))
-                  
-                ]),
-              )
-
-            ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.transparent),
+              child: Column(children: [
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  child: TextField(
+                    decoration: InputDecoration.collapsed(
+                      fillColor: Colors.white,
+                      hintText: 'Añade una descripción',
+                      hintStyle: TextStyle(color: Colors.white),
+                    ),
+                    textAlign: TextAlign.start,
+                    maxLines: null,
+                    style: TextStyle(color: Colors.white),
+                    autofocus: false,
+                    controller: _controllerDescripcion,
+                  ),
+                ),
+              ]),
+            )),
             SizedBox(height: 20),
-           
             SizedBox(
               child: button(() async {
-                showSnackBar(context, 'Contraseñas iguales');
-                Database.addPost(usuario: context.watch<User>().getNombre(), 
-                fotoPost: 'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000', 
-                fotoperfil: context.watch<User>().getFoto(), 
-                descripcion: 'holaa'); }, "Añadir"),
+                Database.addPost(
+                    usuario: nombre,
+                    fotoPost:
+                        'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
+                    fotoperfil: foto,
+                    descripcion: _controllerDescripcion.text);
+              }, "Añadir"),
             ),
-           
           ]),
         ),
       ),
     );
   }
 }
-
 
 Widget postAgregar() {
   return Container(
@@ -104,8 +113,6 @@ Widget postAgregar() {
               SizedBox(
                 child: botonFoto(),
               )
-                  
-                
             ]),
           ),
           Spacer(flex: 1)
@@ -114,25 +121,27 @@ Widget postAgregar() {
 }
 
 Widget botonFoto() {
-    return GestureDetector(
-    child: Container(
-      child: Center(
-        child: Ink(
-          decoration: const ShapeDecoration(
-            shape: CircleBorder(),
-          ),
-          child: IconButton(
-            iconSize: 50.0,
-            icon: const Icon(Icons.photo),
-            color: Colors.white,
-            onPressed: () {
-              PickImage.pickImageGallery(source: ImageSource.gallery).then((File){});},
-          ),
+  return GestureDetector(
+      child: Container(
+    child: Center(
+      child: Ink(
+        decoration: const ShapeDecoration(
+          shape: CircleBorder(),
+        ),
+        child: IconButton(
+          iconSize: 50.0,
+          icon: const Icon(Icons.photo),
+          color: Colors.white,
+          onPressed: () {
+            PickImage.pickImageGallery(source: ImageSource.gallery)
+                .then((File) {});
+          },
         ),
       ),
-    )
-  );
+    ),
+  ));
 }
+
 void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
