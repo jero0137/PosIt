@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:posit/utils/Database.dart';
 import '../vistas/comentario.dart';
 import 'imagenCircular.dart';
 
 class post extends StatelessWidget {
+  final String docpostID;
   final String fotoPerfil;
   final String usuario;
   final String fotoPost;
@@ -11,7 +13,7 @@ class post extends StatelessWidget {
   final BuildContext context;
   final String descripcion;
 
-  const post({super.key,required this.fotoPerfil,required this.usuario,required this.fotoPost,
+  const post({super.key,required this.docpostID,required this.fotoPerfil,required this.usuario,required this.fotoPost,
   required this.cantidadLikes,required this.cantidadComentarios, required this.descripcion,required this.context});
 
   @override
@@ -65,7 +67,7 @@ class post extends StatelessWidget {
               //
               GestureDetector(
                 onTap: () => {
-                  cantidadLikes: cantidadLikes+1,
+                  Database.updateLikes(cantidadLikes: cantidadLikes, docID: docpostID),
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
@@ -125,3 +127,4 @@ class post extends StatelessWidget {
     );
   }
 }
+

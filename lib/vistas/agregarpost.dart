@@ -68,7 +68,7 @@ class _agregarpostState extends State<agregarpost> {
                 Database.addPost(
                     usuario: nombre,
                     fotoPost:
-                        'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
+                      'https://img.freepik.com/foto-gratis/retrato-hermoso-mujer-joven-posicion-pared-gris_231208-10760.jpg?w=2000',
                     fotoperfil: foto,
                     descripcion: _controllerDescripcion.text);
               }, "Añadir"),
@@ -112,7 +112,7 @@ Widget postAgregar() {
               ),
               SizedBox(
                 child: botonFoto(),
-              )
+              ),
             ]),
           ),
           Spacer(flex: 1)

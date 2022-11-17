@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/post.dart';
@@ -23,29 +25,30 @@ class Feed extends StatelessWidget {
                     'Hubo un error en la carga. Por favor intenta nuevamente en un rato');
               } else if (snapshot.hasData || snapshot.data != null) {
                 return ListView.separated(
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 16.0),
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      var postInfo = snapshot.data!.docs[index].data()!
-                          as Map<String, dynamic>;
-                      String docID = snapshot.data!.docs[index].id;
-                      String infusuario = postInfo['nombreUsuario'];
-                      String fotop = postInfo['foto'];
-                      String fotoperfilp = postInfo['fotoperfil'];
-                      String descripcionp = postInfo['descripcion'];
-                      int cantidadLikes = postInfo['cantidadLikes'];
-                      int cantidadComentarios = postInfo['cantidadComentarios'];
+                  separatorBuilder: (context, index) => const SizedBox(height: 16.0),
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var postInfo = snapshot.data!.docs[index].data()!as Map<String, dynamic>;
+                    String docID = snapshot.data!.docs[index].id;
+                    String infusuario = postInfo['nombreUsuario'];
+                    String fotop = postInfo['foto'];
+                    String fotoperfilp = postInfo['fotoperfil'];
+                    String descripcionp = postInfo['descripcion'];
+                    int cantidadLikes = postInfo['cantidadLikes'];
+                    int cantidadComentarios = postInfo['cantidadComentarios'];
 
-                      return post(
-                        fotoPerfil: fotoperfilp,
-                         usuario: infusuario, 
-                         fotoPost: fotop, 
-                         cantidadLikes: cantidadLikes, 
-                         cantidadComentarios: cantidadComentarios, 
-                         descripcion: descripcionp, 
-                         context: context);
-                    });
+                    return post(
+                      docpostID: docID,
+                      fotoPerfil: fotoperfilp,
+                      usuario: infusuario, 
+                      fotoPost: fotop, 
+                      cantidadLikes: cantidadLikes, 
+                      cantidadComentarios: cantidadComentarios, 
+                      descripcion: descripcionp, 
+                      context: context
+                    );
+                  }
+                );
               }
               return const Center(
                 child: CircularProgressIndicator(
@@ -53,6 +56,7 @@ class Feed extends StatelessWidget {
                     Colors.black,
                   ),
                 ),
+                
               );
             },
           ),
@@ -60,4 +64,11 @@ class Feed extends StatelessWidget {
       ),
     );
   }
+  void showSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(text),
+    ),
+  );
+}
 }

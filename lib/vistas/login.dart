@@ -45,7 +45,6 @@ class login extends StatelessWidget {
             Spacer(
               flex: 1,
             ),
-            
             SizedBox(
               width: 257,
               child: TextField(
@@ -93,15 +92,17 @@ class login extends StatelessWidget {
             ),
             SizedBox(
               child: button(() async {
-                
-                await Authentication.signInWithEmailAndPassword(email:_controllerCorreo.text,pass:_controllerPass.text,context: context);
-                if(Authentication.entro==true){
+                await Authentication.signInWithEmailAndPassword(
+                  email: _controllerCorreo.text,
+                  pass: _controllerPass.text,
+                  context: context,
+                );
+                if (Authentication.entro == true) {
                   Provider.of<User>(context, listen: false).inicializar();
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return controlador();
-                }));
+                    return controlador();
+                  }));
                 }
-                
               }, "Iniciar sesion"),
             ),
             SizedBox(
