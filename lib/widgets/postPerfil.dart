@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/comentarios.dart';
 import 'package:posit/vistas/editarpost.dart';
-import '../vistas/comentario.dart';
+
 import 'imagenCircular.dart';
 
 class postPerfil extends StatelessWidget {
@@ -104,7 +105,7 @@ class postPerfil extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const comentario()))
+                          builder: (context) => const comentarios()))
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',

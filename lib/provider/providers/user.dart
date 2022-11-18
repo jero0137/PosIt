@@ -9,21 +9,13 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
   String _linkFoto =
       'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b';
   String descripcion = '';
-  String id = '';
-
 
   Future<void> inicializar() async {
-     var valores = await Database.getUser();
-     setId(valores['Usuario']);
-     setNombre(valores['name']);
-     setUsuario(valores['Usuario']);
-     setCorreo(valores['email']);
-     setDescripcion(valores['descripcion']);
-  }
-
-  void setId(String nuevoId) {
-    id = nuevoId;
-    notifyListeners();
+    var valores = await Database.readInfoUser();
+    setNombre(valores['name']);
+    setUsuario(valores['Usuario']);
+    setCorreo(valores['email']);
+    setDescripcion(valores['descripcion']);
   }
 
   void setNombre(String nuevoNombre) {

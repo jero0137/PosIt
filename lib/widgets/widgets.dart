@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:posit/vistas/comentario.dart';
 import 'package:posit/widgets/imagenCircular.dart';
-
 
 GestureDetector button(VoidCallback function, String text) {
   return GestureDetector(
@@ -37,5 +35,3 @@ AppBar cabeceraFlecha(String titulo, BuildContext context) {
     leadingWidth: 20,
   );
 }
-
-

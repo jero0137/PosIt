@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:posit/utils/Database.dart';
-import '../vistas/comentario.dart';
+import 'package:posit/vistas/comentarios.dart';
+
 import 'imagenCircular.dart';
 
 class post extends StatelessWidget {
@@ -13,8 +14,16 @@ class post extends StatelessWidget {
   final BuildContext context;
   final String descripcion;
 
-  const post({super.key,required this.docpostID,required this.fotoPerfil,required this.usuario,required this.fotoPost,
-  required this.cantidadLikes,required this.cantidadComentarios, required this.descripcion,required this.context});
+  const post(
+      {super.key,
+      required this.docpostID,
+      required this.fotoPerfil,
+      required this.usuario,
+      required this.fotoPost,
+      required this.cantidadLikes,
+      required this.cantidadComentarios,
+      required this.descripcion,
+      required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +76,17 @@ class post extends StatelessWidget {
               //
               GestureDetector(
                 onTap: () => {
-                  Database.updateLikes(cantidadLikes: cantidadLikes, docID: docpostID),
+                  Database.updateLikes(
+                      cantidadLikes: cantidadLikes, docID: docpostID),
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
-                width: 30,
-                height: 30,
-              ),
+                  width: 30,
+                  height: 30,
+                ),
               ),
               //
-             
+
               const SizedBox(
                 width: 6,
               ),
@@ -90,11 +100,9 @@ class post extends StatelessWidget {
               GestureDetector(
                 onTap: () => {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const comentario()
-                    )
-                  )
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const comentarios()))
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',
@@ -127,4 +135,3 @@ class post extends StatelessWidget {
     );
   }
 }
-
