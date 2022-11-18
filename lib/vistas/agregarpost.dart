@@ -8,7 +8,7 @@ import 'package:posit/utils/pick_image.dart';
 import 'package:posit/widgets/descripcion.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
-import '../provider/providers/user.dart';
+import '../provider/providers/UserProvider.dart';
 import '../widgets/campoLinea.dart';
 
 class agregarpost extends StatefulWidget {
@@ -22,8 +22,8 @@ class _agregarpostState extends State<agregarpost> {
   @override
   Widget build(BuildContext context) {
     TextEditingController _controllerDescripcion = TextEditingController();
-    var nombre = context.watch<User>().getNombre();
-    var foto = context.watch<User>().getFoto();
+    var nombre = context.watch<UserProvider>().getNombre();
+    var foto = context.watch<UserProvider>().getFoto();
     return Scaffold(
       backgroundColor: Color(0xFF031630),
       body: Center(

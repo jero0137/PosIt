@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../provider/providers/user.dart';
+import '../provider/providers/UserProvider.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
@@ -41,13 +41,13 @@ class Database {
     CollectionReference referenceComent =
         referencerPost.collection('comentarios');
     Map<String, dynamic> data = <String, dynamic>{
-      "usuario": userUid,
+      "idUser": userUid,
       "fotoperfil": fotoperfil,
-      "foto": fotoPost,
+      "fotopost": fotoPost,
       "descripcion": descripcion,
-      "nombreUsuario": usuario,
-      "cantidadLikes": 0,
-      "cantidadComentarios": 0,
+      "usuario": usuario,
+      "cantidadlikes": 0,
+      "cantidadcomentarios": 0,
     };
 
     await referencerPost.set(data).whenComplete(() {
@@ -93,8 +93,9 @@ class Database {
     return dataa;
   }
 
-  static Future<Map<String, dynamic>> readInfoUser() async {
-    DocumentReference userInfo = _mainCollection.doc(userUid);
+  static Future<Map<String, dynamic>> readInfoUser(String userId) async {
+    Database.userUid = userId;
+    DocumentReference userInfo = _mainCollection.doc(userId);
 
     String nombre = "";
     String email = "";
@@ -128,7 +129,7 @@ class Database {
     CollectionReference infoperfilpostCollection = _postCollection;
     _firestore
         .collection('post')
-        .where('usuario', isEqualTo: userUid)
+        .where('idUser', isEqualTo: userUid)
         .get()
         .then(
           (res) => infoperfilpostCollection.snapshots(),
@@ -149,7 +150,7 @@ class Database {
         listamegusta.remove(userUid);
       }else if(cantidadLikes > 0){
         data = <String, dynamic>{//Nuevos datos
-          "cantidadLikes": cantidadLikes - 1,
+          "cantidadlikes": cantidadLikes - 1,
         };
         listamegusta.remove(userUid);
       }
@@ -159,7 +160,7 @@ class Database {
         //return;
       }else if (cantidadLikes >= 0){
         data = <String, dynamic>{//Nuevos datos
-          "cantidadLikes": cantidadLikes + 1,
+          "cantidadlikes": cantidadLikes + 1,
         };
         listamegusta.add(userUid);
       }

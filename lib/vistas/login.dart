@@ -5,8 +5,9 @@ import 'package:posit/widgets/campoPass.dart';
 import 'package:posit/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/providers/user.dart';
+import '../provider/providers/UserProvider.dart';
 import '../utils/Authentication.dart';
+import '../utils/Validator.dart';
 import '../widgets/cabecera.dart';
 import 'controlador.dart';
 
@@ -47,10 +48,10 @@ class login extends StatelessWidget {
             ),
             SizedBox(
               width: 257,
-              child: TextField(
+              child: TextFormField(
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  hintText: 'Ingrese su usuario',
+                  hintText: 'Ingrese su correo',
                   hintStyle: TextStyle(color: Colors.white),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),
@@ -63,12 +64,14 @@ class login extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
                 autofocus: false,
                 controller: _controllerCorreo,
+                validator: (String? value) =>
+                    Validator.validateField(value: value!),
               ),
             ),
             Spacer(),
             SizedBox(
               width: 257,
-              child: TextField(
+              child: TextFormField(
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   hintText: 'Ingrese su contraseña',
@@ -85,6 +88,8 @@ class login extends StatelessWidget {
                 autofocus: false,
                 obscureText: true,
                 controller: _controllerPass,
+                validator: (String? value) =>
+                    Validator.validateField(value: value!),
               ),
             ),
             Spacer(
@@ -97,12 +102,7 @@ class login extends StatelessWidget {
                   pass: _controllerPass.text,
                   context: context,
                 );
-                if (Authentication.entro == true) {
-                  Provider.of<User>(context, listen: false).inicializar();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return controlador();
-                  }));
-                }
+                
               }, "Iniciar sesión"),
             ),
             SizedBox(

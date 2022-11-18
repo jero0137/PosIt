@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:posit/utils/Database.dart';
 
-class User with ChangeNotifier, DiagnosticableTreeMixin {
+class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
   String _nombre = '';
   String _usuario = '';
   String _correo = '';
@@ -10,8 +10,10 @@ class User with ChangeNotifier, DiagnosticableTreeMixin {
       'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b';
   String descripcion = '';
 
-  Future<void> inicializar() async {
-    var valores = await Database.readInfoUser();
+
+
+  Future<void> inicializar(String userUid) async {
+    var valores = await Database.readInfoUser(userUid);
     setNombre(valores['name']);
     setUsuario(valores['Usuario']);
     setCorreo(valores['email']);

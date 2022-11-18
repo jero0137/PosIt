@@ -4,7 +4,7 @@ import 'package:posit/vistas/configuracion.dart';
 import 'package:posit/widgets/mainAppBar.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/providers/user.dart';
+import '../provider/providers/UserProvider.dart';
 import 'Feed.dart';
 import 'perfil.dart';
 
@@ -24,7 +24,7 @@ class _controladorState extends State<controlador> {
   Widget build(BuildContext context) {
     return WillPopScope(
     child : Scaffold(
-      appBar:  mainAppBar(titulo: 'PosIt', fotoPerfil: context.watch<User>().getFoto() ),
+      appBar:  mainAppBar(titulo: 'PosIt', fotoPerfil: context.watch<UserProvider>().getFoto() ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = (index)),

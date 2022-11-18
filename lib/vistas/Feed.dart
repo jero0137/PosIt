@@ -30,17 +30,17 @@ class Feed extends StatelessWidget {
                   itemBuilder: (context, index) {
                     var postInfo = snapshot.data!.docs[index].data()!as Map<String, dynamic>;
                     String docID = snapshot.data!.docs[index].id;
-                    String infusuario = postInfo['nombreUsuario'];
-                    String fotop = postInfo['foto'];
                     String fotoperfilp = postInfo['fotoperfil'];
+                    String fotop = postInfo['fotopost'];                  
                     String descripcionp = postInfo['descripcion'];
-                    int cantidadLikes = postInfo['cantidadLikes'];
-                    int cantidadComentarios = postInfo['cantidadComentarios'];
+                    String usuario = postInfo['usuario'];
+                    int cantidadLikes = postInfo['cantidadlikes'];
+                    int cantidadComentarios = postInfo['cantidadcomentarios'];
 
                     return post(
                       docpostID: docID,
                       fotoPerfil: fotoperfilp,
-                      usuario: infusuario, 
+                      usuario: usuario, 
                       fotoPost: fotop, 
                       cantidadLikes: cantidadLikes, 
                       cantidadComentarios: cantidadComentarios, 

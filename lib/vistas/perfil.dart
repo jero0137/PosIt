@@ -7,7 +7,7 @@ import '../utils/Database.dart';
 import '../widgets/post.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/providers/user.dart';
+import '../provider/providers/UserProvider.dart';
 
 class perfil extends StatelessWidget {
   perfil({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class perfil extends StatelessWidget {
                     height: 150,
                   ),
                   imagenCircular(
-                      width: 150, imagen: context.watch<User>().getFoto()),
+                      width: 150, imagen: context.watch<UserProvider>().getFoto()),
                   SizedBox(
                     height: 20,
                   ),
@@ -43,7 +43,7 @@ class perfil extends StatelessWidget {
                       SizedBox(
                         height: 30,
                         child: Text(
-                          context.watch<User>().getNombre(),
+                          context.watch<UserProvider>().getNombre(),
                           style: TextStyle(
                               fontSize: 24,
                               color: Colors.white,
@@ -57,7 +57,7 @@ class perfil extends StatelessWidget {
                         child: Container(
                           width: 200,
                           child: Text(
-                            context.watch<User>().getDescripcion(),
+                            context.watch<UserProvider>().getDescripcion(),
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,

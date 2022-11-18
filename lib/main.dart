@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/home_page.dart';
 import 'package:posit/vistas/login.dart';
 import 'package:provider/provider.dart';
-import 'provider/providers/user.dart';
+import 'provider/providers/UserProvider.dart';
 
 
 void main() async {
@@ -12,7 +13,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => User(),
+          create: (_) => UserProvider(),
         ),
         
       ],
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: login(),
+      home: HomePage(),
     );
   }
 }
