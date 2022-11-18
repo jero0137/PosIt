@@ -7,7 +7,6 @@ import '../provider/providers/user.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
 final CollectionReference _postCollection = _firestore.collection('post');
-
 final listamegusta = [];
 
 class Database {
@@ -138,19 +137,38 @@ class Database {
     return infoperfilpostCollection.snapshots();
   }
 
-  static Future<void> updateLikes(
-      {required int cantidadLikes, required String docID}) async {
+  static Future<void> updateLikes({required int cantidadLikes, required String docID}) async {
     DocumentReference referenceLikes = _postCollection.doc(docID);
-
-    ///se le pasa argumento al .doc para que sepa cuál documento vamos a actualizar.
-    ///A la hora de crear, también se le puede pasar argumento (tipo String) para definirle manualmente el ID
-
-    Map<String, dynamic> data = <String, dynamic>{
-      //Nuevos datos
-      "cantidadLikes": cantidadLikes + 1,
-    };
+///se le pasa argumento al .doc para que sepa cuál documento vamos a actualizar.
+///A la hora de crear, también se le puede pasar argumento (tipo String) para definirle manualmente el ID
+    Map<String, dynamic> data = <String,dynamic>{} ;
+    
+    if(listamegusta.contains(userUid)){
+      if(cantidadLikes <= 0){
+        //return;
+        listamegusta.remove(userUid);
+      }else if(cantidadLikes > 0){
+        data = <String, dynamic>{//Nuevos datos
+          "cantidadLikes": cantidadLikes - 1,
+        };
+        listamegusta.remove(userUid);
+      }
+    }else{
+      
+      if(cantidadLikes < 0){
+        //return;
+      }else if (cantidadLikes >= 0){
+        data = <String, dynamic>{//Nuevos datos
+          "cantidadLikes": cantidadLikes + 1,
+        };
+        listamegusta.add(userUid);
+      }
+    }
+    print(listamegusta);
+    
     await referenceLikes
-        .update(data) //Función para actualizar
+        .update(data)//Función para actualizar
         .catchError((e) => print(e));
+        
   }
 }

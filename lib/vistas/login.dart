@@ -103,7 +103,7 @@ class login extends StatelessWidget {
                     return controlador();
                   }));
                 }
-              }, "Iniciar sesion"),
+              }, "Iniciar sesión"),
             ),
             SizedBox(
               height: 10,
