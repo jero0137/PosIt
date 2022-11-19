@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:posit/utils/Authentication.dart';
 import 'package:posit/widgets/campoFormulario.dart';
 import 'package:provider/provider.dart';
 
@@ -81,6 +82,22 @@ class _configuracionState extends State<configuracion> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
+                Row(
+                  children: [
+                    Spacer(
+                      flex: 1,
+                    ),
+                    SizedBox(
+                      width: 330,
+                      child: button(() {Authentication.signOut(context: context);}, "Cerrar sesión"),
+                    ),
+                    Spacer(
+                      flex: 1,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
               ],
             ),
           ],

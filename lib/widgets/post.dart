@@ -59,12 +59,17 @@ class post extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 5,
+            height: 8,
           ),
-          Image.network(
-            fotoPost,
-            width: 330,
+          Container(
+            width: 270,
+            height: 250,
+            child: Image.network(
+              fotoPost,
+              fit: BoxFit.cover,
+            ),
           ),
+          
           const SizedBox(
             height: 10,
           ),

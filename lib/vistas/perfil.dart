@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:posit/widgets/imagenCircular.dart';
 import 'package:posit/widgets/postPerfil.dart';
 import '../utils/Database.dart';
-import '../widgets/post.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/providers/UserProvider.dart';
@@ -88,8 +86,7 @@ class perfil extends StatelessWidget {
                           } else if (snapshot.hasData ||
                               snapshot.data != null) {
                             return ListView.separated(
-                                //shrinkWrap:true,
-                                //scrollDirection: Axis.vertical,
+                                
 
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 16.0),
@@ -97,19 +94,19 @@ class perfil extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   var postInfo = snapshot.data!.docs[index]
                                       .data()! as Map<String, dynamic>;
+                                      
                                   String docID = snapshot.data!.docs[index].id;
-                                  String infusuario = postInfo['nombreUsuario'];
-                                  String fotop = postInfo['foto'];
                                   String fotoperfilp = postInfo['fotoperfil'];
+                                  String fotop = postInfo['fotopost'];                  
                                   String descripcionp = postInfo['descripcion'];
-                                  int cantidadLikes = postInfo['cantidadLikes'];
-                                  int cantidadComentarios =
-                                      postInfo['cantidadComentarios'];
+                                  String usuario = postInfo['usuario'];
+                                  int cantidadLikes = postInfo['cantidadlikes'];
+                                  int cantidadComentarios = postInfo['cantidadcomentarios'];
 
-                                  return post(
+                                  return postPerfil(
                                       docpostID: docID,
                                       fotoPerfil: fotoperfilp,
-                                      usuario: infusuario,
+                                      usuario: usuario,
                                       fotoPost: fotop,
                                       cantidadLikes: cantidadLikes,
                                       cantidadComentarios: cantidadComentarios,

@@ -10,7 +10,15 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
       'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/FotoPerfil.png?alt=media&token=e4126886-2c3d-4b0e-8fb8-8fc80321d62b';
   String descripcion = '';
 
-
+  void clearData() {
+    //Esto es simplemente para dejar el user en blanco cuando cierren sesión
+    _nombre = '';
+    _usuario = '';
+    _correo = '';
+    _linkFoto = '';
+    descripcion = '';
+    notifyListeners();
+  }
 
   Future<void> inicializar(String userUid) async {
     var valores = await Database.readInfoUser(userUid);
@@ -18,6 +26,7 @@ class UserProvider with ChangeNotifier, DiagnosticableTreeMixin {
     setUsuario(valores['Usuario']);
     setCorreo(valores['email']);
     setDescripcion(valores['descripcion']);
+    setFoto(valores['fotoperfil']);
   }
 
   void setNombre(String nuevoNombre) {

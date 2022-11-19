@@ -1,9 +1,15 @@
-class Functions{
+import 'package:flutter/material.dart';
 
-  static bool contrasenasIguales(String pass,String pass2){
-    
+class Functions {
+  static bool contrasenasIguales(String pass, String pass2) {
     return pass == pass2;
-
   }
-  
+
+  static void showSnackBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text),
+      ),
+    );
+  }
 }

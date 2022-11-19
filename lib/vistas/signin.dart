@@ -1,25 +1,33 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:posit/utils/Authentication.dart';
-import 'package:posit/vistas/login.dart';
-import 'package:posit/widgets/widgets.dart';
-import 'package:provider/provider.dart';
-import '../provider/providers/UserProvider.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:image_picker/image_picker.dart';
+
+import '../utils/Authentication.dart';
 import '../utils/Functions.dart';
 import '../utils/Validator.dart';
 import '../widgets/cabecera.dart';
-import 'controlador.dart';
+import '../widgets/widgets.dart';
+import 'login.dart';
 
-class signin extends StatelessWidget {
-  signin({Key? key}) : super(key: key);
+class signin extends StatefulWidget {
+  const signin({super.key});
 
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerPass = TextEditingController();
-  final TextEditingController _controllerConfirmarPass =
-      TextEditingController();
-  final TextEditingController _controllerUsuario = TextEditingController();
-  final TextEditingController _controllerNombre = TextEditingController();
-  final TextEditingController _controllerDescripcion = TextEditingController();
+  @override
+  State<signin> createState() => _signinState();
+}
 
+final TextEditingController _controllerEmail = TextEditingController();
+final TextEditingController _controllerPass = TextEditingController();
+final TextEditingController _controllerConfirmarPass = TextEditingController();
+final TextEditingController _controllerUsuario = TextEditingController();
+final TextEditingController _controllerNombre = TextEditingController();
+final TextEditingController _controllerDescripcion = TextEditingController();
+File? _selectedPicture;
+
+class _signinState extends State<signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,6 +122,58 @@ class signin extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
+                    Container(
+                        alignment: Alignment.center,
+                        width: 320,
+                        height: 240,
+                        margin: const EdgeInsets.only(bottom: 5, top: 5),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          color: Colors.transparent,
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              width: 300,
+                              height: 220,
+                              margin: const EdgeInsets.only(bottom: 5, top: 5),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.transparent,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                color: Color.fromRGBO(133, 130, 229, 90),
+                              ),
+                              child: Column(children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  child: GestureDetector(
+                                    child: Image(
+                                      image: getFotoPerfil(),
+                                      height: 200,
+                                      width: 200,
+                                    ),
+                                    onTap: () async {
+                                      var image = await ImagePicker().pickImage(
+                                          source: ImageSource.gallery);
+
+                                      setState(() {
+                                        _selectedPicture = File(image!.path);
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          ],
+                        )),
                     SizedBox(
                         child: Container(
                       width: 320,
@@ -133,7 +193,7 @@ class signin extends StatelessWidget {
                           child: TextFormField(
                             decoration: InputDecoration.collapsed(
                               fillColor: Colors.white,
-                              hintText: 'Añade una descripción',
+                              hintText: 'Añade una descripción para tu perfil',
                               hintStyle: TextStyle(color: Colors.white),
                             ),
                             textAlign: TextAlign.start,
@@ -204,14 +264,20 @@ class signin extends StatelessWidget {
                     ),
                     SizedBox(
                       child: button(() async {
-                        await Authentication.register(
-                                email: _controllerEmail.text,
-                                descripcion: _controllerDescripcion.text,
-                                nombre: _controllerNombre.text,
-                                pass: _controllerPass.text,
-                                usuario: _controllerUsuario.text,
-                                context: context)
-                            .then((value) => Navigator.pop(context));
+                        if (Functions.contrasenasIguales(_controllerPass.text,
+                            _controllerConfirmarPass.text)) {
+                          await Authentication.register(
+                                  fotoPerfil: _selectedPicture!,
+                                  email: _controllerEmail.text,
+                                  descripcion: _controllerDescripcion.text,
+                                  nombre: _controllerNombre.text,
+                                  pass: _controllerPass.text,
+                                  usuario: _controllerUsuario.text,
+                                  context: context)
+                              .then((value) => Navigator.pop(context));
+                        } else
+                          Functions.showSnackBar(
+                              context, "Las contraseñas deben de ser iguales");
                       }, "Registrarse"),
                     ),
                     SizedBox(
@@ -270,10 +336,9 @@ class signin extends StatelessWidget {
   }
 }
 
-void showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(text),
-    ),
-  );
+ImageProvider<Object> getFotoPerfil() {
+  if (_selectedPicture != null) return Image.file(_selectedPicture!).image;
+  return Image.network(
+          "https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/agregarFoto.png?alt=media&token=f06b7a9c-5962-4b03-bf2d-facfae4b7bbd")
+      .image;
 }

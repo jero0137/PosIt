@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:posit/vistas/agregarpost.dart';
+import 'package:uuid/uuid.dart';
 
 import '../provider/providers/UserProvider.dart';
+import 'Functions.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final FirebaseStorage storage = FirebaseStorage.instance;
 final CollectionReference _mainCollection = _firestore.collection('users');
 final CollectionReference _postCollection = _firestore.collection('post');
 final listamegusta = [];
@@ -12,47 +19,79 @@ final listamegusta = [];
 class Database {
   static String? userUid;
   static Future<void> addUser(
-      {required String email,
+      {
+      required File? fotoPerfil,
+      required String email,
       required String uid,
-      required String descripcion,
+      required String? descripcion,
       required String nombre,
+      required BuildContext context,
       required String usuario}) async {
     DocumentReference referencer = _mainCollection.doc(uid);
+
+    if (fotoPerfil != null || descripcion != null) {
+
+      var imageName = Uuid().v1();
+      var imagePath = "/postImagenes/$userUid/$imageName.jpg";
+      
+      Reference ref = storage.ref().child(imagePath);
+      
+      await ref.putFile(fotoPerfil!);
+
+      String linkDeLaFoto = await ref.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       "name": nombre,
       "email": email,
       "Usuario": usuario,
       "descripcion": descripcion,
+      "fotoperfil" : linkDeLaFoto,
     };
     await referencer.set(data).whenComplete(() {
       userUid = uid;
       print('Se agregó el usuario');
     }).catchError((e) => print(e));
+    } else {
+      Functions.showSnackBar(context, 'Complete toda la información');
+    }
   }
 
   static Future<void> addPost({
     required String usuario,
-    required String fotoPost,
     required String fotoperfil,
-    required String descripcion,
+    required String? descripcion,
+    required File? fotoDelPost,
+    required BuildContext context,
   }) async {
-    DocumentReference referencerPost = _postCollection.doc();
-    CollectionReference referenceComent =
-        referencerPost.collection('comentarios');
-    Map<String, dynamic> data = <String, dynamic>{
-      "idUser": userUid,
-      "fotoperfil": fotoperfil,
-      "fotopost": fotoPost,
-      "descripcion": descripcion,
-      "usuario": usuario,
-      "cantidadlikes": 0,
-      "cantidadcomentarios": 0,
-    };
+    if (fotoDelPost != null || descripcion != null) {
 
-    await referencerPost.set(data).whenComplete(() {
-      print('Se agregó el post');
-    }).catchError((e) => print(e));
+      var imageName = Uuid().v1();
+      var imagePath = "/postImagenes/$userUid/$imageName.jpg";
+      
+      Reference ref = storage.ref().child(imagePath);
+      
+      await ref.putFile(fotoDelPost!);
+
+      String linkDeLaFoto = await ref.getDownloadURL();
+
+      DocumentReference referencerPost = _postCollection.doc();
+
+      Map<String, dynamic> data = <String, dynamic>{
+        "idUser": userUid,
+        "fotoperfil": fotoperfil,
+        "fotopost": linkDeLaFoto,
+        "descripcion": descripcion,
+        "usuario": usuario,
+        "cantidadlikes": 0,
+        "cantidadcomentarios": 0,
+      };
+
+      await referencerPost.set(data).whenComplete(() {
+        Functions.showSnackBar(context, 'Se agregó el post');
+      }).catchError((e) => print(e));
+    } else {
+      Functions.showSnackBar(context, 'Complete toda la información');
+    }
   }
 
   static Future<void> addComentario(
@@ -100,11 +139,13 @@ class Database {
     String email = "";
     String usuario = "";
     String descripcion = "";
+    String linkFoto = "";
     Map<String, dynamic> dataa = <String, dynamic>{
       "name": nombre,
       "email": email,
       "Usuario": usuario,
       "descripcion": descripcion,
+      "fotoperfil": linkFoto
     };
 
     await userInfo.get().then(
@@ -133,15 +174,10 @@ class Database {
 
   static Stream<QuerySnapshot> readPostPerfil() {
     CollectionReference infoperfilpostCollection = _postCollection;
-    _firestore
-        .collection('post')
+
+    return infoperfilpostCollection
         .where('idUser', isEqualTo: userUid)
-        .get()
-        .then(
-          (res) => infoperfilpostCollection.snapshots(),
-          onError: (e) => print("Error completing: $e"),
-        );
-    return infoperfilpostCollection.snapshots();
+        .snapshots();
   }
 
   static Future<void> updateLikes(

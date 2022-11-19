@@ -1,4 +1,4 @@
-/*
+
 import 'package:flutter/material.dart';
 import 'package:posit/vistas/comentarios.dart';
 import 'package:posit/vistas/editarpost.dart';
@@ -6,6 +6,7 @@ import 'package:posit/vistas/editarpost.dart';
 import 'imagenCircular.dart';
 
 class postPerfil extends StatelessWidget {
+  final String docpostID;
   final String fotoPerfil;
   final String usuario;
   final String fotoPost;
@@ -16,6 +17,7 @@ class postPerfil extends StatelessWidget {
 
   const postPerfil(
       {super.key,
+      required this.docpostID,
       required this.fotoPerfil,
       required this.usuario,
       required this.fotoPost,
@@ -105,7 +107,7 @@ class postPerfil extends StatelessWidget {
               GestureDetector(
                 onTap: () => {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => comentarios(docpostID: docpos,)))
+                      MaterialPageRoute(builder: (context) => comentarios(docpostID: docpostID,)))
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',
@@ -138,4 +140,3 @@ class postPerfil extends StatelessWidget {
     );
   }
 }
-*/

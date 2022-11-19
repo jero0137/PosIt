@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/providers/UserProvider.dart';
-import '../vistas/signin.dart';
 import 'Database.dart';
+import 'Functions.dart';
 
 class Authentication {
 
@@ -18,6 +20,7 @@ class Authentication {
 
   static Future<void> register(
       {required String email,
+      required File fotoPerfil,
       required String pass,
       required String nombre,
       required String usuario,
@@ -33,7 +36,7 @@ class Authentication {
           .user;
 
     } on FirebaseAuthException catch (e) {
-      showSnackBar(
+      Functions.showSnackBar(
           context, e.message!); 
     }
 
@@ -41,7 +44,7 @@ class Authentication {
 
 
         await Database.addUser(
-            email: email,descripcion: descripcion ,nombre: nombre, usuario: usuario, uid: user.uid);
+            email: email,descripcion: descripcion ,nombre: nombre, usuario: usuario, uid: user.uid,fotoPerfil: fotoPerfil,context: context);
 
         await Provider.of<UserProvider>(context, listen: false)
                               .inicializar(user.uid);    
@@ -61,7 +64,7 @@ class Authentication {
           .user;
 
     } on FirebaseAuthException catch (e) {
-      showSnackBar(
+      Functions.showSnackBar(
           context, e.message!); 
           user = null;
     }
@@ -71,4 +74,12 @@ class Authentication {
     }
 
   }
+
+  static signOut({required BuildContext context}) async {
+    //La función más fácil del universo, para cerrar sesión. El Stream auto detecta que no hay más data
+    await _auth.signOut();
+    //Limpiamos la data del provider
+    context.read<UserProvider>().clearData();
+  }
+
 }
