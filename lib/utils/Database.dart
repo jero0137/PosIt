@@ -55,7 +55,6 @@ class Database {
     }).catchError((e) => print(e));
   }
 
-  //Temporal: como hago para traer los comentarios de un post en especifico
   static Future<void> addComentario(
       {required String foto,
       required String usuario,
@@ -125,7 +124,14 @@ class Database {
     return infopostCollection.snapshots();
   }
 
-  static Stream<QuerySnapshot>? readPostPerfil() {
+  static Stream<QuerySnapshot>? readComentarios(String postID) {
+    CollectionReference comentarios =
+        _postCollection.doc(postID).collection('comentarios');
+
+    return comentarios.snapshots();
+  }
+
+  static Stream<QuerySnapshot> readPostPerfil() {
     CollectionReference infoperfilpostCollection = _postCollection;
     _firestore
         .collection('post')
@@ -138,38 +144,40 @@ class Database {
     return infoperfilpostCollection.snapshots();
   }
 
-  static Future<void> updateLikes({required int cantidadLikes, required String docID}) async {
+  static Future<void> updateLikes(
+      {required int cantidadLikes, required String docID}) async {
     DocumentReference referenceLikes = _postCollection.doc(docID);
-///se le pasa argumento al .doc para que sepa cuál documento vamos a actualizar.
-///A la hora de crear, también se le puede pasar argumento (tipo String) para definirle manualmente el ID
-    Map<String, dynamic> data = <String,dynamic>{} ;
-    
-    if(listamegusta.contains(userUid)){
-      if(cantidadLikes <= 0){
+
+    ///se le pasa argumento al .doc para que sepa cuál documento vamos a actualizar.
+    ///A la hora de crear, también se le puede pasar argumento (tipo String) para definirle manualmente el ID
+    Map<String, dynamic> data = <String, dynamic>{};
+
+    if (listamegusta.contains(userUid)) {
+      if (cantidadLikes <= 0) {
         //return;
         listamegusta.remove(userUid);
-      }else if(cantidadLikes > 0){
-        data = <String, dynamic>{//Nuevos datos
+      } else if (cantidadLikes > 0) {
+        data = <String, dynamic>{
+          //Nuevos datos
           "cantidadlikes": cantidadLikes - 1,
         };
         listamegusta.remove(userUid);
       }
-    }else{
-      
-      if(cantidadLikes < 0){
+    } else {
+      if (cantidadLikes < 0) {
         //return;
-      }else if (cantidadLikes >= 0){
-        data = <String, dynamic>{//Nuevos datos
+      } else if (cantidadLikes >= 0) {
+        data = <String, dynamic>{
+          //Nuevos datos
           "cantidadlikes": cantidadLikes + 1,
         };
         listamegusta.add(userUid);
       }
     }
     print(listamegusta);
-    
+
     await referenceLikes
-        .update(data)//Función para actualizar
+        .update(data) //Función para actualizar
         .catchError((e) => print(e));
-        
   }
 }
