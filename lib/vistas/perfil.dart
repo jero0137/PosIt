@@ -15,13 +15,13 @@ class perfil extends StatelessWidget {
   Widget build(BuildContext context) {
     var nombre = context.watch<UserProvider>().getNombre();
     var foto = context.watch<UserProvider>().getFoto();
-    var descripcion = context.watch<UserProvider>().getDescripcion;
+    var descripcion = context.watch<UserProvider>().getDescripcion();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: infoUser(
         nombre: nombre,
         imagen: foto,
-        descripcion: descripcion.toString(),
+        descripcion: descripcion,
       ),
       backgroundColor: Color(0xFF031630),
       body: Center(
@@ -29,13 +29,13 @@ class perfil extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(0xFF031630),
           ),
-          child: ListView(children: [
-            Column(children: [
+          child: SingleChildScrollView(
+            child: Column(children: [
               //listapost
               SizedBox(
                   height: (MediaQuery.of(context).size.height),
                   child: Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(12),
                       child: StreamBuilder<QuerySnapshot>(
                         stream: Database.readPostPerfil(),
                         builder: (context, snapshot) {
@@ -46,7 +46,7 @@ class perfil extends StatelessWidget {
                               snapshot.data != null) {
                             return ListView.separated(
                                 separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 30.0),
+                                    const SizedBox(height: 10.0),
                                 itemCount: snapshot.data!.docs.length,
                                 itemBuilder: (context, index) {
                                   var postInfo = snapshot.data!.docs[index]
@@ -85,7 +85,7 @@ class perfil extends StatelessWidget {
                 height: 200,
               )
             ]),
-          ]),
+          ),
         ),
       ),
     );

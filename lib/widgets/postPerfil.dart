@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:posit/utils/Database.dart';
 import 'package:posit/vistas/comentarios.dart';
-import 'package:posit/vistas/editarpost.dart';
 
+import '../vistas/editarpost.dart';
 import 'imagenCircular.dart';
 
 class postPerfil extends StatelessWidget {
@@ -57,9 +57,7 @@ class postPerfil extends StatelessWidget {
                 usuario,
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
-              Spacer(
-                flex: 2,
-              ),
+              Spacer(),
               IconButton(
                   onPressed: () {
                     Navigator.push(context,
@@ -74,11 +72,15 @@ class postPerfil extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 5,
+            height: 8,
           ),
-          Image.network(
-            fotoPost,
-            width: 330,
+          Container(
+            width: 270,
+            height: 250,
+            child: Image.network(
+              fotoPost,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(
             height: 10,
@@ -88,11 +90,20 @@ class postPerfil extends StatelessWidget {
               const Spacer(
                 flex: 1,
               ),
-              Image.network(
-                'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
-                width: 30,
-                height: 30,
+              //
+              GestureDetector(
+                onTap: () => {
+                  Database.updateLikes(
+                      cantidadLikes: cantidadLikes, docID: docpostID),
+                },
+                child: Image.network(
+                  'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/like.png?alt=media&token=033e25e3-4e8f-444c-8d36-f6666ddb1123',
+                  width: 30,
+                  height: 30,
+                ),
               ),
+              //
+
               const SizedBox(
                 width: 6,
               ),
@@ -103,11 +114,14 @@ class postPerfil extends StatelessWidget {
               const Spacer(
                 flex: 2,
               ),
-
               GestureDetector(
                 onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => comentarios(docpostID: docpostID,)))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => comentarios(
+                                docpostID: docpostID,
+                              )))
                 },
                 child: Image.network(
                   'https://firebasestorage.googleapis.com/v0/b/posit-afbe6.appspot.com/o/keyboard.png?alt=media&token=fd323da9-47f5-490d-9647-fd3bef130271',
