@@ -23,11 +23,68 @@ class comentarios extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFF031630),
       appBar: cabeceraFlecha('COMENTARIOS', context),
+      bottomNavigationBar: BottomAppBar(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.all(5.0),
+            margin: const EdgeInsets.all(10.0),
+            decoration: new BoxDecoration(
+              borderRadius: new BorderRadius.circular(16.0),
+              color: Colors.green,
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 220,
+                  child: TextField(
+                    controller: _controllerComment,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      hintText: 'Agregue un comentario',
+                      hintStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                    ),
+                    textAlign: TextAlign.start,
+                    maxLines: null,
+                    style: TextStyle(color: Colors.white),
+                    autofocus: false,
+                  ),
+                ),
+                SizedBox(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Ink(
+                        decoration: const ShapeDecoration(
+                          color: Color(0xFF37A557),
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.send),
+                          color: Colors.white,
+                          onPressed: () {
+                            Database.addComentario(
+                                foto: foto,
+                                usuario: user,
+                                texto: _controllerComment.text,
+                                postId: docpostID);
+                            _controllerComment.text = "";
+                          },
+                          
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+          )),
       body: Center(
         child: Container(
           child: ListView(children: [
             Column(children: [
-              //listapost
               SizedBox(
                   height: (MediaQuery.of(context).size.height),
                   child: Padding(
@@ -69,58 +126,6 @@ class comentarios extends StatelessWidget {
                           );
                         },
                       ))),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                  ),
-                  SizedBox(
-                    width: 180,
-                    child: TextField(
-                      controller: _controllerComment,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        hintText: 'Agregue un comentario',
-                        hintStyle: TextStyle(color: Colors.white),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                      ),
-                      textAlign: TextAlign.start,
-                      maxLines: null,
-                      style: TextStyle(color: Colors.white),
-                      autofocus: false,
-                    ),
-                  ),
-                  SizedBox(
-                      width: 50,
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Center(
-                          child: Ink(
-                            decoration: const ShapeDecoration(
-                              color: Color(0xFF37A557),
-                              shape: CircleBorder(),
-                            ),
-                            child: IconButton(
-                              icon: const Icon(Icons.send),
-                              color: Colors.white,
-                              onPressed: () {
-                                Database.addComentario(
-                                    foto: foto,
-                                    usuario: user,
-                                    texto: _controllerComment.text,
-                                    postId: docpostID);
-                              },
-                            ),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
             ]),
           ]),
         ),

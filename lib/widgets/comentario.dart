@@ -48,11 +48,16 @@ class comentario extends StatelessWidget {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                   textAlign: TextAlign.left,
                 ),
-                Text(
-                  texto,
-                  style: TextStyle(color: Colors.white, fontSize: 17),
-                  textAlign: TextAlign.left,
-                )
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    texto,
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
               ],
             )
           ],

@@ -98,6 +98,7 @@ class Database {
       {required String foto,
       required String usuario,
       required String texto,
+      
       required String postId}) async {
     DocumentReference referencePost =
         _postCollection.doc(postId).collection('comentarios').doc();
@@ -108,7 +109,7 @@ class Database {
       'texto': texto
     };
     await referencePost.set(data).whenComplete(() {
-      print('Se agregó comentario');
+      updateCantidadComentarios(postId);
     }).catchError((e) => print(e));
   }
 
@@ -180,6 +181,30 @@ class Database {
         .snapshots();
   }
 
+  static Future<void> updateCantidadComentarios(String idPost) async {
+    DocumentReference referenceLikes = _postCollection.doc(idPost);
+
+    int cantidadcomentarios = 0;
+
+    await referenceLikes.get().then(
+      //Ya sabemos que con .then() podemos hacer algo después de que la función termine
+      //En este caso nos devuelve una DocumentSnapshot
+      (DocumentSnapshot doc) {
+        //Mapeamos esa data del snapshot para que sea más fácil sacarle los campos específicos
+        final data = doc.data() as Map<String, dynamic>;
+        cantidadcomentarios = data['cantidadcomentarios'];
+      },
+    );
+
+  Map<String, dynamic> data = <String, dynamic>{
+    "cantidadcomentarios" : cantidadcomentarios + 1
+  };
+
+    await referenceLikes
+        .update(data) //Función para actualizar
+        .catchError((e) => print(e));
+  }
+
   static Future<void> updateLikes(
       {required int cantidadLikes, required String docID}) async {
     DocumentReference referenceLikes = _postCollection.doc(docID);
@@ -187,6 +212,8 @@ class Database {
     ///se le pasa argumento al .doc para que sepa cuál documento vamos a actualizar.
     ///A la hora de crear, también se le puede pasar argumento (tipo String) para definirle manualmente el ID
     Map<String, dynamic> data = <String, dynamic>{};
+
+    
 
     if (listamegusta.contains(userUid)) {
       if (cantidadLikes <= 0) {
