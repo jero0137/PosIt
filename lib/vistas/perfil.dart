@@ -29,63 +29,52 @@ class perfil extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(0xFF031630),
           ),
-          child: SingleChildScrollView(
-            child: Column(children: [
-              //listapost
-              SizedBox(
-                  height: (MediaQuery.of(context).size.height),
-                  child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: Database.readPostPerfil(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return const Text(
-                                'Hubo un error en la carga. Por favor intenta nuevamente en un rato');
-                          } else if (snapshot.hasData ||
-                              snapshot.data != null) {
-                            return ListView.separated(
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 10.0),
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) {
-                                  var postInfo = snapshot.data!.docs[index]
-                                      .data()! as Map<String, dynamic>;
+          child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: Database.readPostPerfil(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Text(
+                        'Hubo un error en la carga. Por favor intenta nuevamente en un rato');
+                  } else if (snapshot.hasData || snapshot.data != null) {
+                    return ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 10.0),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var postInfo = snapshot.data!.docs[index].data()!
+                              as Map<String, dynamic>;
 
-                                  String docID = snapshot.data!.docs[index].id;
-                                  String fotoperfilp = postInfo['fotoperfil'];
-                                  String fotop = postInfo['fotopost'];
-                                  String descripcionp = postInfo['descripcion'];
-                                  String usuario = postInfo['usuario'];
-                                  int cantidadLikes = postInfo['cantidadlikes'];
-                                  int cantidadComentarios =
-                                      postInfo['cantidadcomentarios'];
+                          String docID = snapshot.data!.docs[index].id;
+                          String fotoperfilp = postInfo['fotoperfil'];
+                          String fotop = postInfo['fotopost'];
+                          String descripcionp = postInfo['descripcion'];
+                          String usuario = postInfo['usuario'];
+                          int cantidadLikes = postInfo['cantidadlikes'];
+                          int cantidadComentarios =
+                              postInfo['cantidadcomentarios'];
 
-                                  return postPerfil(
-                                      docpostID: docID,
-                                      fotoPerfil: fotoperfilp,
-                                      usuario: usuario,
-                                      fotoPost: fotop,
-                                      cantidadLikes: cantidadLikes,
-                                      cantidadComentarios: cantidadComentarios,
-                                      descripcion: descripcionp,
-                                      context: context);
-                                });
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.black,
-                              ),
-                            ),
-                          );
-                        },
-                      ))),
-              SizedBox(
-                height: 200,
-              )
-            ]),
-          ),
+                          return postPerfil(
+                              docpostID: docID,
+                              fotoPerfil: fotoperfilp,
+                              usuario: usuario,
+                              fotoPost: fotop,
+                              cantidadLikes: cantidadLikes,
+                              cantidadComentarios: cantidadComentarios,
+                              descripcion: descripcionp,
+                              context: context);
+                        });
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.black,
+                      ),
+                    ),
+                  );
+                },
+              )),
         ),
       ),
     );
